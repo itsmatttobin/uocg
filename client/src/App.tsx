@@ -1,5 +1,5 @@
 import React, { ChangeEvent } from 'react';
-import './App.css';
+import './App.scss';
 import socketIOClient from 'socket.io-client';
 import PLAYER_STATE from './definitions/player-state';
 import Room from './definitions/room';
@@ -44,7 +44,7 @@ export default class App extends React.Component<{}, StateType> {
   renderPlayerList = () => {
     return (
       <div>
-        <h3>Players</h3>
+        <h3 className="title is-5">Players</h3>
           <ul>
             {!this.state.room.players.length && <li>No players</li>}
             {this.renderPlayer()}
@@ -65,22 +65,42 @@ export default class App extends React.Component<{}, StateType> {
     this.socket.emit('shuffle white cards', this.state.roomId);
   }
 
+  renderBlackCards = () => {
+    return this.state.room.blackCards.map(card => <li>{card.text}</li>);
+  }
+
+  handleShuffleBlackCardsClick = () => {
+    this.socket.emit('shuffle black cards', this.state.roomId);
+  }
+
   render() {
     return (
-      <div>
-        <h3>Join room</h3>
+      <div className="App">
+        <h3 className="title is-4">Join room</h3>
         Room ID: <input type="text" value={this.state.roomId} onChange={this.handleRoomIdChange} />
         Name: <input type="text" value={this.state.name} onChange={this.handleNameChange} />
         <button onClick={this.handleJoinClick} disabled={!this.isJoinEnabled()}>Join</button>
 
         <hr/>
 
-        {this.state.playerState === PLAYER_STATE.JOINED_ROOM && this.renderPlayerList()}
-
-        <hr/>
-
-        {this.state.room.whiteCards.length > 0 && <button onClick={this.handleShuffleWhiteCardsClick}>Shuffle</button>}
-        {this.state.room.whiteCards.length > 0 && this.renderWhiteCards()}
+        {this.state.playerState === PLAYER_STATE.JOINED_ROOM &&
+          <div className="play-area columns">
+            <div className="column">
+              <div className="columns">
+                <div className="column">
+                  {this.state.room.whiteCards.length > 0 && <button onClick={this.handleShuffleWhiteCardsClick}>Shuffle</button>}
+                  {this.state.room.whiteCards.length > 0 && this.renderWhiteCards()}
+                </div>
+                <div className="column">
+                  {this.state.room.blackCards.length > 0 && <button onClick={this.handleShuffleBlackCardsClick}>Shuffle</button>}
+                  {this.state.room.blackCards.length > 0 && this.renderBlackCards()}
+                </div>
+              </div>
+            </div>
+            <div className="column is-2">
+              {this.renderPlayerList()}
+            </div>
+          </div>}
       </div>
     );
   }
