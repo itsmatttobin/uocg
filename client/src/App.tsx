@@ -5,6 +5,7 @@ import PLAYER_STATE from './definitions/player-state';
 import Room from './definitions/room';
 import PlayerList from './components/PlayerList';
 import JoinGame from './components/JoinGame';
+import GameArea from './components/GameArea';
 
 export default class App extends React.Component<{}, StateType> {
   state: StateType = {
@@ -37,22 +38,6 @@ export default class App extends React.Component<{}, StateType> {
     return this.state.playerState === PLAYER_STATE.JOINED_ROOM;
   }
 
-  renderWhiteCards = () => {
-    return this.state.room.whiteCards.map(card => <li>{card}</li>);
-  }
-
-  handleShuffleWhiteCardsClick = () => {
-    this.socket.emit('shuffle white cards', this.state.roomId);
-  }
-
-  renderBlackCards = () => {
-    return this.state.room.blackCards.map(card => <li>{card.text}</li>);
-  }
-
-  handleShuffleBlackCardsClick = () => {
-    this.socket.emit('shuffle black cards', this.state.roomId);
-  }
-
   render() {
     return (
       <div className="App">
@@ -61,21 +46,13 @@ export default class App extends React.Component<{}, StateType> {
         {this.hasPlayerJoinedRoom() &&
           <div className="columns">
             <div className="column">
-              <div className="columns">
-                <div className="column">
-                  {this.state.room.whiteCards.length > 0 && <button onClick={this.handleShuffleWhiteCardsClick}>Shuffle</button>}
-                  {this.state.room.whiteCards.length > 0 && this.renderWhiteCards()}
-                </div>
-                <div className="column">
-                  {this.state.room.blackCards.length > 0 && <button onClick={this.handleShuffleBlackCardsClick}>Shuffle</button>}
-                  {this.state.room.blackCards.length > 0 && this.renderBlackCards()}
-                </div>
-              </div>
+              <GameArea socket={this.socket} roomId={this.state.roomId} room={this.state.room}></GameArea>
             </div>
             <div className="column is-2">
               <PlayerList players={this.state.room.players}></PlayerList>
             </div>
-          </div>}
+          </div>
+        }
       </div>
     );
   }

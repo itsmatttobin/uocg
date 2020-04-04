@@ -1,7 +1,7 @@
 import React from 'react';
 import Player from '../definitions/player';
 
-export default class PlayerList extends React.Component<PropType> {
+export default class PlayerList extends React.Component<PropsType> {
   renderPlayer = () => {
     return this.props.players && this.props.players.map((player: any) => <li key={player.id}>{player.name}</li>);
   }
@@ -19,6 +19,6 @@ export default class PlayerList extends React.Component<PropType> {
   }
 }
 
-interface PropType {
+interface PropsType {
   players: Player[]
 }
