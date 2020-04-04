@@ -1,6 +1,6 @@
 import BlackCard from './black-card';
 import Player from './player';
-import PlayedCard from './played-card';
+import AnswerCard from './answer-card';
 
 interface Room {
   id: string;
@@ -8,7 +8,7 @@ interface Room {
   whiteCards: string[];
   players: Player[];
   currentCard: BlackCard | null;
-  playedCards: PlayedCard[];
+  answerCards: AnswerCard[];
 }
 
 export default Room;

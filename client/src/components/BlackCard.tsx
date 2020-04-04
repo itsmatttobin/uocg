@@ -1,7 +1,7 @@
 import React from 'react';
-import BlackCard from '../definitions/black-card';
+import BlackCardType from '../definitions/black-card';
 
-export default class Hand extends React.Component<PropsType> {
+export default class BlackCard extends React.Component<PropsType> {
   render() {
     return (
       <div className="cah-card cah-card--black is-size-5 has-text-weight-bold">
@@ -16,5 +16,5 @@ export default class Hand extends React.Component<PropsType> {
 }
 
 interface PropsType {
-  card: BlackCard;
+  card: BlackCardType;
 }

@@ -18,7 +18,7 @@ export default class App extends React.Component<{}, StateType> {
       whiteCards: [],
       players: [],
       currentCard: null,
-      playedCards: [],
+      answerCards: [],
     },
     playerState: PLAYER_STATE.NOT_IN_ROOM,
     socketId: '',

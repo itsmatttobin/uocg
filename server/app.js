@@ -22,7 +22,7 @@ function initRoom(id) {
     whiteCards: shuffleCards(whiteCards),
     players: [],
     currentCard: null,
-    playedCards: [],
+    answerCards: [],
   };
 }
 
@@ -107,17 +107,17 @@ io.on('connection', (socket) => {
   socket.on('draw black card', id => {
     rooms[id].currentCard = rooms[id].blackCards[0];
     rooms[id].blackCards.shift();
-    rooms[id].playedCards = [];
+    rooms[id].answerCards = [];
     updateRoom(id);
   });
 
   socket.on('play card', (id, card) => {
-    rooms[id].playedCards.push({ text: card, revealed: false });
+    rooms[id].answerCards.push({ text: card, revealed: false });
     updateRoom(id);
   });
 
   socket.on('reveal card', (id, cardToReveal) => {
-    const foundCard = rooms[id].playedCards.find(card => card.text === cardToReveal.text);
+    const foundCard = rooms[id].answerCards.find(card => card.text === cardToReveal.text);
     foundCard.revealed = !foundCard.revealed;
     updateRoom(id);
   });
