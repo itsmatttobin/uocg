@@ -1,4 +1,8 @@
+const cors = require('cors');
 const app = require('express')();
+
+app.use(cors());
+
 const http = require('http').createServer(app);
 const io = require('socket.io')(http);
 const blackCards = require('./data/black-cards');
