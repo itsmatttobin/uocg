@@ -1,10 +1,8 @@
 import React from 'react';
-import Player from '../definitions/player';
+import IPlayer from '../definitions/player';
 
-export default class PlayerList extends React.Component<PropsType> {
-  renderPlayer = () => {
-    return this.props.players && this.props.players.map((player: any) => <li key={player.id}>{player.name}</li>);
-  }
+export default class PlayerList extends React.Component<IPropsType> {
+  renderPlayer = () => this.props.players && this.props.players.map((player: any) => <li key={player.id}>{player.name}</li>);
 
   render() {
     return (
@@ -19,6 +17,6 @@ export default class PlayerList extends React.Component<PropsType> {
   }
 }
 
-interface PropsType {
-  players: Player[]
+interface IPropsType {
+  players: IPlayer[];
 }

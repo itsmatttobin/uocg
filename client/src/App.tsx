@@ -2,13 +2,13 @@ import React from 'react';
 import './App.scss';
 import socketIOClient from 'socket.io-client';
 import PLAYER_STATE from './definitions/player-state';
-import Room from './definitions/room';
+import IRoom from './definitions/room';
 import PlayerList from './components/PlayerList';
 import JoinGame from './components/JoinGame';
 import GameArea from './components/GameArea';
 
-export default class App extends React.Component<{}, StateType> {
-  state: StateType = {
+export default class App extends React.Component<{}, IStateType> {
+  state: IStateType = {
     host: 'http://localhost:4000',
     roomId: '',
     name: '',
@@ -22,7 +22,7 @@ export default class App extends React.Component<{}, StateType> {
     },
     playerState: PLAYER_STATE.NOT_IN_ROOM,
     socketId: '',
-  }
+  };
 
   socket = socketIOClient(this.state.host);
 
@@ -51,27 +51,23 @@ export default class App extends React.Component<{}, StateType> {
     });
   }
 
-  hasPlayerJoinedRoom = () => {
-    return this.state.playerState === PLAYER_STATE.JOINED_ROOM;
-  }
+  hasPlayerJoinedRoom = () => this.state.playerState === PLAYER_STATE.JOINED_ROOM;
 
   render() {
     return (
       <div className="app">
-        {!this.hasPlayerJoinedRoom() &&
-          <JoinGame onJoinRoom={this.handleJoinRoom}></JoinGame>
-        }
+        {!this.hasPlayerJoinedRoom() && <JoinGame onJoinRoom={this.handleJoinRoom} />}
 
-        {this.hasPlayerJoinedRoom() &&
+        {this.hasPlayerJoinedRoom() && (
           <div className="columns">
             <div className="column">
-              <GameArea socket={this.socket} roomId={this.state.roomId} room={this.state.room}></GameArea>
+              <GameArea socket={this.socket} roomId={this.state.roomId} room={this.state.room} />
             </div>
             <div className="column is-2">
-              <PlayerList players={this.state.room.players}></PlayerList>
+              <PlayerList players={this.state.room.players} />
             </div>
           </div>
-        }
+        )}
 
         {/* TODO: Footer w/ CAH credit */}
       </div>
@@ -79,11 +75,11 @@ export default class App extends React.Component<{}, StateType> {
   }
 }
 
-interface StateType {
+interface IStateType {
   host: string;
   roomId: string;
   name: string;
-  room: Room;
+  room: IRoom;
   playerState: PLAYER_STATE;
   socketId: string;
 }

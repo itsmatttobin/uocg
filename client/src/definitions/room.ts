@@ -1,14 +1,14 @@
-import BlackCard from './black-card';
-import Player from './player';
-import AnswerCard from './answer-card';
+import IBlackCard from './black-card';
+import IPlayer from './player';
+import IAnswerCard from './answer-card';
 
-interface Room {
+interface IRoom {
   id: string;
-  blackCards: BlackCard[];
+  blackCards: IBlackCard[];
   whiteCards: string[];
-  players: Player[];
-  currentCard: BlackCard | null;
-  answerCards: AnswerCard[];
+  players: IPlayer[];
+  currentCard: IBlackCard | null;
+  answerCards: IAnswerCard[];
 }
 
-export default Room;
+export default IRoom;

@@ -1,10 +1,10 @@
-import BlackCard from "./black-card";
+import IBlackCard from './black-card';
 
-interface Player {
+interface IPlayer {
   id: string;
   name: string;
   hand: string[];
-  wonCards: BlackCard[];
+  wonCards: IBlackCard[];
 }
 
-export default Player;
+export default IPlayer;

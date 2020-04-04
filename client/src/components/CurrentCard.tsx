@@ -1,17 +1,15 @@
 import React from 'react';
-import Room from "../definitions/room";
+import IRoom from '../definitions/room';
 import BlackCard from './BlackCard';
 
-export default class CurrentCard extends React.Component<PropsType> {
+export default class CurrentCard extends React.Component<IPropsType> {
   handleDrawBlackCardClick = () => {
     if (this.props.room.blackCards.length > 1) {
       this.props.socket.emit('draw black card', this.props.roomId);
     }
   }
 
-  renderCurrentCard = () => {
-    return this.props.room.currentCard && <BlackCard card={this.props.room.currentCard}></BlackCard>
-  }
+  renderCurrentCard = () => this.props.room.currentCard && <BlackCard card={this.props.room.currentCard} />;
 
   render() {
     return (
@@ -30,8 +28,8 @@ export default class CurrentCard extends React.Component<PropsType> {
   }
 }
 
-interface PropsType {
+interface IPropsType {
   socket: SocketIOClient.Socket;
   roomId: string;
-  room: Room;
+  room: IRoom;
 }

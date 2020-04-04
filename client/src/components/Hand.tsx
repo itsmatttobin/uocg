@@ -1,15 +1,15 @@
 import React from 'react';
-import Room from '../definitions/room';
+import IRoom from '../definitions/room';
 import WhiteCard from './WhiteCard';
 
-export default class Hand extends React.Component<PropsType, StateType> {
-  state: StateType = {
+export default class Hand extends React.Component<IPropsType, IStateType> {
+  state: IStateType = {
     whiteCards: [],
-  }
+  };
 
   handleDrawCardClick = () => {
     if (this.state.whiteCards.length < 10) {
-      this.setState({ whiteCards: [...this.state.whiteCards, this.props.room.whiteCards[0]] })
+      this.setState({ whiteCards: [...this.state.whiteCards, this.props.room.whiteCards[0]] });
       this.props.socket.emit('draw white card', this.props.roomId);
     }
   }
@@ -34,23 +34,23 @@ export default class Hand extends React.Component<PropsType, StateType> {
         </div>
 
         <div className="columns is-multiline">
-          {this.state.whiteCards.map(card =>
-            <div className="column is-one-fifth">
-              <WhiteCard card={card} onPlayCard={this.handlePlayCard}></WhiteCard>
+          {this.state.whiteCards.map((card, index) => (
+            <div key={index} className="column is-one-fifth">
+              <WhiteCard card={card} onPlayCard={this.handlePlayCard} />
             </div>
-          )}
+          ))}
         </div>
       </div>
     );
   }
 }
 
-interface PropsType {
+interface IPropsType {
   socket: SocketIOClient.Socket;
   roomId: string;
-  room: Room;
+  room: IRoom;
 }
 
-interface StateType {
+interface IStateType {
   whiteCards: string[];
 }

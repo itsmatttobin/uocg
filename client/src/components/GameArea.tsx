@@ -1,10 +1,10 @@
 import React from 'react';
-import Room from '../definitions/room';
+import IRoom from '../definitions/room';
 import Hand from './Hand';
 import CurrentCard from './CurrentCard';
 import AnswerCardArea from './AnswerCardArea';
 
-export default class GameArea extends React.Component<PropsType> {
+export default class GameArea extends React.Component<IPropsType> {
   handleShuffleWhiteCardsClick = () => {
     this.props.socket.emit('shuffle white cards', this.props.roomId);
   }
@@ -19,32 +19,40 @@ export default class GameArea extends React.Component<PropsType> {
         <h3 className="title is-4">Room ID: {this.props.room.id}</h3>
 
         <div className="buttons">
-          {this.props.room.blackCards.length > 0 && <button className="button is-black" onClick={this.handleShuffleBlackCardsClick}>Shuffle black cards</button>}
-          {this.props.room.whiteCards.length > 0 && <button className="button" onClick={this.handleShuffleWhiteCardsClick}>Shuffle white cards</button>}
+          {this.props.room.blackCards.length > 0 && (
+            <button className="button is-black" onClick={this.handleShuffleBlackCardsClick}>
+              Shuffle black cards
+            </button>
+          )}
+          {this.props.room.whiteCards.length > 0 && (
+            <button className="button" onClick={this.handleShuffleWhiteCardsClick}>
+              Shuffle white cards
+            </button>
+          )}
         </div>
 
         <hr/>
 
         <div className="columns">
           <div className="column is-one-fifth">
-            <CurrentCard socket={this.props.socket} roomId={this.props.roomId} room={this.props.room}></CurrentCard>
+            <CurrentCard socket={this.props.socket} roomId={this.props.roomId} room={this.props.room} />
           </div>
 
           <div className="column is-four-fifths">
-            <AnswerCardArea socket={this.props.socket} roomId={this.props.roomId} room={this.props.room}></AnswerCardArea>
+            <AnswerCardArea socket={this.props.socket} roomId={this.props.roomId} room={this.props.room} />
           </div>
         </div>
 
         <hr/>
 
-        <Hand socket={this.props.socket} roomId={this.props.roomId} room={this.props.room}></Hand>
+        <Hand socket={this.props.socket} roomId={this.props.roomId} room={this.props.room} />
       </div>
-    )
+    );
   }
 }
 
-interface PropsType {
+interface IPropsType {
   socket: SocketIOClient.Socket;
   roomId: string;
-  room: Room;
+  room: IRoom;
 }
