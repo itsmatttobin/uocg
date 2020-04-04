@@ -1,0 +1,23 @@
+{
+  "extends": [
+    "tslint:recommended",
+    "tslint-react"
+  ],
+  "rules": {
+    "quotemark": [true, "single", "jsx-double"],
+    "ordered-imports": [true, {
+      "import-sources-order": "any"
+    }],
+    "object-literal-sort-keys": false,
+    "member-access": false,
+    "jsx-no-multiline-js": false,
+    "arrow-parens": [true, "ban-single-arg-parens"],
+    "arrow-return-shorthand": [true, "multiline"],
+    "max-line-length": [true, 140]
+  },
+  "linterOptions": {
+    "exclude": [
+      "src/serviceWorker.ts"
+    ]
+  }
+}

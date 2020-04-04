@@ -1,6 +1,6 @@
-interface AnswerCard {
+interface IAnswerCard {
   text: string;
   revealed: boolean;
 }
 
-export default AnswerCard;
+export default IAnswerCard;

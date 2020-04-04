@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default class WhiteCard extends React.Component<PropsType> {
+export default class WhiteCard extends React.Component<IPropsType> {
   handlePlayCardClick = () => {
     this.props.onPlayCard(this.props.card);
   }
@@ -18,7 +18,7 @@ export default class WhiteCard extends React.Component<PropsType> {
   }
 }
 
-interface PropsType {
+interface IPropsType {
   card: string;
   onPlayCard: (card: string) => void;
 }

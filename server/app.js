@@ -1,17 +1,16 @@
-const cors = require('cors');
 const app = require('express')();
-
-app.use(cors());
-
 const http = require('http').createServer(app);
 const io = require('socket.io')(http);
+const cors = require('cors');
 const blackCards = require('./data/black-cards');
 const whiteCards = require('./data/white-cards');
+
+app.use(cors());
 
 const rooms = {};
 
 function updateRoom(id) {
-  // Emit to all clients in a room
+  // Emit room data to all clients in a room
   io.to(id).emit('update room', rooms[id]);
 }
 
@@ -41,19 +40,19 @@ function shuffleCards(cards) {
   let temporaryValue;
   let randomIndex;
 
-	// While there cards left to shuffle
-	while (0 !== currentIndex) {
-		// Pick a remaining card
-		randomIndex = Math.floor(Math.random() * currentIndex);
-		currentIndex -= 1;
+  // While there cards left to shuffle
+  while (0 !== currentIndex) {
+    // Pick a remaining card
+    randomIndex = Math.floor(Math.random() * currentIndex);
+    currentIndex -= 1;
 
-		// And swap it with the current card
-		temporaryValue = cards[currentIndex];
-		cards[currentIndex] = cards[randomIndex];
-		cards[randomIndex] = temporaryValue;
-	}
+    // And swap it with the current card
+    temporaryValue = cards[currentIndex];
+    cards[currentIndex] = cards[randomIndex];
+    cards[randomIndex] = temporaryValue;
+  }
 
-	return cards;
+  return cards;
 }
 
 io.on('connection', (socket) => {
@@ -122,7 +121,6 @@ io.on('connection', (socket) => {
     updateRoom(id);
   });
 
-  // TODO: Remove player from room
   // TODO: Delete room data on disconnect of all clients
 });
 

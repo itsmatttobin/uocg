@@ -1,10 +1,10 @@
 import React, { ChangeEvent } from 'react';
 
-export default class JoinGame extends React.Component<PropsType, StateType> {
-  state: StateType = {
+export default class JoinGame extends React.Component<IPropsType, IStateType> {
+  state: IStateType = {
     roomId: '',
     name: '',
-  }
+  };
 
   handleRoomIdChange = (e: ChangeEvent<HTMLInputElement>) => {
     this.setState({ roomId: e.target.value });
@@ -18,9 +18,7 @@ export default class JoinGame extends React.Component<PropsType, StateType> {
     this.props.onJoinRoom(this.state.roomId, this.state.name);
   }
 
-  isJoinEnabled = () => {
-    return this.state.roomId && this.state.name;
-  }
+  isJoinEnabled = () => this.state.roomId && this.state.name;
 
   render() {
     return (
@@ -47,11 +45,11 @@ export default class JoinGame extends React.Component<PropsType, StateType> {
   }
 }
 
-interface PropsType {
+interface IPropsType {
   onJoinRoom: (roomId: string, name: string) => void;
 }
 
-interface StateType {
+interface IStateType {
   roomId: string;
   name: string;
 }

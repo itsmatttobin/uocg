@@ -1,6 +1,6 @@
-interface BlackCard {
+interface IBlackCard {
   text: string;
   pick: number;
 }
 
-export default BlackCard;
+export default IBlackCard;
