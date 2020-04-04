@@ -1,14 +1,31 @@
 const app = require('express')();
 const http = require('http').createServer(app);
 const io = require('socket.io')(http);
+const blackCards = require('./data/black-cards');
+const whiteCards = require('./data/white-cards');
 
-const rooms = {
-  abc: ['a', 'b', 'c'],
-  def: ['d', 'e', 'f'],
-}
+const rooms = {};
 
 function updateRoom(id) {
   io.to(id).emit('update room', rooms[id]);
+}
+
+function initRoom(id) {
+  rooms[id] = {
+    blackCards,
+    whiteCards,
+    players: [],
+  };
+}
+
+function addPlayerToRoom(socket, name, roomId) {
+  const player = {
+    id: socket.id,
+    name,
+    hand: []
+  };
+
+  rooms[roomId].players.push(player);
 }
 
 io.on('connection', (socket) => {
@@ -19,14 +36,20 @@ io.on('connection', (socket) => {
     previousId = currentId;
   };
 
-  socket.on('join room', id => {
+  socket.on('join room', (id, name) => {
     safeJoin(id);
 
     // Create a new room if one doesn't already exist
     if (!rooms[id]) {
-      rooms[id] = [];
+      initRoom(id);
     }
+
+    addPlayerToRoom(socket, name, id);
+    updateRoom(id);
   });
+
+  // TODO: Remove player from room
+  // TODO: Delete room data on disconnect of all clients
 });
 
 http.listen(4000, () => {
