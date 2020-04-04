@@ -1,0 +1,46 @@
+@import "../node_modules/bulma/sass/utilities/initial-variables.sass";
+
+.app {
+  max-width: 1600px;
+  margin: 0 auto;
+}
+
+.cah-card {
+  position: relative;
+  box-shadow: 3px 2px 10px 3px rgba(0, 0, 0, 0.05);
+  border-radius: 5px;
+  border: 1px solid $grey-lighter;
+  padding: 1.5rem;
+  height: 20rem;
+
+  &--black {
+    color: $white;
+    background: $black;
+  }
+
+  &__footer {
+    position: absolute;
+    bottom: 1.5rem;
+    left: 1.5rem;
+    right: 1.5rem;
+
+    &--dynamic {
+      display: none;
+    }
+  }
+
+  &:hover {
+    .cah-card__footer--dynamic {
+      display: block;
+    }
+  }
+}
+
+.button-section {
+  margin-bottom: 1.5rem;
+
+  &--bottom {
+    margin-top: 1.5rem;
+    margin-bottom: 0;
+  }
+}

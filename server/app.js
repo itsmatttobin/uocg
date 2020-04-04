@@ -16,6 +16,8 @@ function initRoom(id) {
     blackCards,
     whiteCards,
     players: [],
+    currentCard: null,
+    playedCards: []
   };
 }
 
@@ -23,7 +25,7 @@ function addPlayerToRoom(socket, name, roomId) {
   const player = {
     id: socket.id,
     name,
-    hand: []
+    wonCards: [],
   };
 
   rooms[roomId].players.push(player);
@@ -79,6 +81,22 @@ io.on('connection', (socket) => {
     rooms[id].blackCards = shuffleCards(rooms[id].blackCards);
     updateRoom(id);
   });
+
+  socket.on('draw white card', id => {
+    rooms[id].whiteCards.shift();
+    updateRoom(id);
+  });
+
+  socket.on('draw black card', id => {
+    rooms[id].currentCard = rooms[id].blackCards[0];
+    rooms[id].blackCards.shift();
+    updateRoom(id);
+  });
+
+  socket.on('play card', (id, card) => {
+    rooms[id].playedCards.push(card);
+    updateRoom(id);
+  })
 
   // TODO: Remove player from room
   // TODO: Delete room data on disconnect of all clients

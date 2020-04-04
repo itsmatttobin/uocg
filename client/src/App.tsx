@@ -16,6 +16,8 @@ export default class App extends React.Component<{}, StateType> {
       blackCards: [],
       whiteCards: [],
       players: [],
+      currentCard: null,
+      playedCards: [],
     },
     playerState: PLAYER_STATE.NOT_IN_ROOM,
   }
@@ -40,7 +42,7 @@ export default class App extends React.Component<{}, StateType> {
 
   render() {
     return (
-      <div className="App">
+      <div className="app">
         <JoinGame onJoinRoom={this.handleJoinRoom}></JoinGame>
 
         {this.hasPlayerJoinedRoom() &&
