@@ -1,8 +1,10 @@
-import React, { ChangeEvent } from 'react';
+import React from 'react';
 import './App.scss';
 import socketIOClient from 'socket.io-client';
 import PLAYER_STATE from './definitions/player-state';
 import Room from './definitions/room';
+import PlayerList from './components/PlayerList';
+import JoinGame from './components/JoinGame';
 
 export default class App extends React.Component<{}, StateType> {
   state: StateType = {
@@ -25,36 +27,14 @@ export default class App extends React.Component<{}, StateType> {
     });
   }
 
-  handleRoomIdChange = (e: ChangeEvent<HTMLInputElement>) => {
-    this.setState({ roomId: e.target.value });
+  handleJoinRoom = (roomId: string, name: string) => {
+    this.setState({ roomId, name }, () => {
+      this.socket.emit('join room', this.state.roomId, this.state.name);
+    });
   }
 
-  handleNameChange = (e: ChangeEvent<HTMLInputElement>) => {
-    this.setState({ name: e.target.value });
-  }
-
-  isJoinEnabled = () => {
-    return this.state.roomId && this.state.name;
-  }
-
-  handleJoinClick = () => {
-    this.socket.emit('join room', this.state.roomId, this.state.name);
-  }
-
-  renderPlayerList = () => {
-    return (
-      <div>
-        <h3 className="title is-5">Players</h3>
-          <ul>
-            {!this.state.room.players.length && <li>No players</li>}
-            {this.renderPlayer()}
-          </ul>
-      </div>
-    );
-  }
-
-  renderPlayer = () => {
-    return this.state.room.players && this.state.room.players.map((player: any) => <li key={player.id}>{player.name}</li>);
+  hasPlayerJoinedRoom = () => {
+    return this.state.playerState === PLAYER_STATE.JOINED_ROOM;
   }
 
   renderWhiteCards = () => {
@@ -76,15 +56,10 @@ export default class App extends React.Component<{}, StateType> {
   render() {
     return (
       <div className="App">
-        <h3 className="title is-4">Join room</h3>
-        Room ID: <input type="text" value={this.state.roomId} onChange={this.handleRoomIdChange} />
-        Name: <input type="text" value={this.state.name} onChange={this.handleNameChange} />
-        <button onClick={this.handleJoinClick} disabled={!this.isJoinEnabled()}>Join</button>
+        <JoinGame onJoinRoom={this.handleJoinRoom}></JoinGame>
 
-        <hr/>
-
-        {this.state.playerState === PLAYER_STATE.JOINED_ROOM &&
-          <div className="play-area columns">
+        {this.hasPlayerJoinedRoom() &&
+          <div className="columns">
             <div className="column">
               <div className="columns">
                 <div className="column">
@@ -98,7 +73,7 @@ export default class App extends React.Component<{}, StateType> {
               </div>
             </div>
             <div className="column is-2">
-              {this.renderPlayerList()}
+              <PlayerList players={this.state.room.players}></PlayerList>
             </div>
           </div>}
       </div>
