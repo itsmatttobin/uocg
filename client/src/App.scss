@@ -17,6 +17,9 @@
     color: $white;
     background: $black;
   }
+  &--played {
+    cursor: pointer;
+  }
 
   &__footer {
     position: absolute;

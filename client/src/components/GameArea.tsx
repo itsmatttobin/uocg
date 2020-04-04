@@ -2,6 +2,7 @@ import React from 'react';
 import Room from '../definitions/room';
 import Hand from './Hand';
 import CurrentCard from './CurrentCard';
+import PlayedCardArea from './PlayedCardArea';
 
 export default class GameArea extends React.Component<PropsType> {
   handleShuffleWhiteCardsClick = () => {
@@ -23,6 +24,10 @@ export default class GameArea extends React.Component<PropsType> {
         <div className="columns">
           <div className="column is-one-fifth">
             <CurrentCard socket={this.props.socket} roomId={this.props.roomId} room={this.props.room}></CurrentCard>
+          </div>
+
+          <div className="column is-four-fifths">
+            <PlayedCardArea socket={this.props.socket} roomId={this.props.roomId} room={this.props.room}></PlayedCardArea>
           </div>
         </div>
 

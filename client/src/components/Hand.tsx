@@ -14,6 +14,16 @@ export default class Hand extends React.Component<PropsType, StateType> {
     }
   }
 
+  handlePlayCard = (card: string) => {
+    const hand = [...this.state.whiteCards];
+    const index = hand.indexOf(card);
+    hand.splice(index, 1);
+
+    this.setState({ whiteCards: hand }, () => {
+      this.props.socket.emit('play card', this.props.roomId, card);
+    });
+  }
+
   render() {
     return (
       <div>
@@ -26,7 +36,7 @@ export default class Hand extends React.Component<PropsType, StateType> {
         <div className="columns is-multiline">
           {this.state.whiteCards.map(card =>
             <div className="column is-one-fifth">
-              <WhiteCard text={card}></WhiteCard>
+              <WhiteCard card={card} onPlayCard={this.handlePlayCard}></WhiteCard>
             </div>
           )}
         </div>
