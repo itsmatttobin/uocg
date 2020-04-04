@@ -3,6 +3,7 @@ import Player from './player';
 import PlayedCard from './played-card';
 
 interface Room {
+  id: string;
   blackCards: BlackCard[];
   whiteCards: string[];
   players: Player[];

@@ -19,18 +19,29 @@ export default class JoinGame extends React.Component<PropsType, StateType> {
   }
 
   isJoinEnabled = () => {
-    return true;
+    return this.state.roomId && this.state.name;
   }
 
   render() {
     return (
       <div>
         <h3 className="title is-4">Join room</h3>
-        Room ID: <input type="text" value={this.state.roomId} onChange={this.handleRoomIdChange} />
-        Name: <input type="text" value={this.state.name} onChange={this.handleNameChange} />
-        <button onClick={this.handleJoinClick} disabled={!this.isJoinEnabled()}>Join</button>
 
-        <hr/>
+        <div className="columns">
+          <div className="column is-one-quarter">
+            <div className="field">
+              <label className="label">Room ID:</label>
+              <input type="text" className="input" value={this.state.roomId} onChange={this.handleRoomIdChange} />
+            </div>
+
+            <div className="field">
+              <label className="label">Name:</label>
+              <input type="text" className="input" value={this.state.name} onChange={this.handleNameChange} />
+            </div>
+
+            <button className="button" onClick={this.handleJoinClick} disabled={!this.isJoinEnabled()}>Join</button>
+          </div>
+        </div>
       </div>
     );
   }

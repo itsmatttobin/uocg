@@ -9,7 +9,7 @@ export default class PlayerList extends React.Component<PropsType> {
   render() {
     return (
       <div>
-        <h3 className="title is-5">Players</h3>
+        <h3 className="title is-4">Players</h3>
           <ul>
             {!this.props.players.length && <li>No players</li>}
             {this.renderPlayer()}

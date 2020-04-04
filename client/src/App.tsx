@@ -13,6 +13,7 @@ export default class App extends React.Component<{}, StateType> {
     roomId: '',
     name: '',
     room: {
+      id: '',
       blackCards: [],
       whiteCards: [],
       players: [],
@@ -57,7 +58,9 @@ export default class App extends React.Component<{}, StateType> {
   render() {
     return (
       <div className="app">
-        <JoinGame onJoinRoom={this.handleJoinRoom}></JoinGame>
+        {!this.hasPlayerJoinedRoom() &&
+          <JoinGame onJoinRoom={this.handleJoinRoom}></JoinGame>
+        }
 
         {this.hasPlayerJoinedRoom() &&
           <div className="columns">
@@ -69,6 +72,8 @@ export default class App extends React.Component<{}, StateType> {
             </div>
           </div>
         }
+
+        {/* TODO: Footer w/ CAH credit */}
       </div>
     );
   }

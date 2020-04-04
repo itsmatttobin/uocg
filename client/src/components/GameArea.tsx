@@ -16,8 +16,12 @@ export default class GameArea extends React.Component<PropsType> {
   render() {
     return (
       <div>
-        {this.props.room.whiteCards.length > 0 && <button className="button" onClick={this.handleShuffleWhiteCardsClick}>Shuffle white cards</button>}
-        {this.props.room.blackCards.length > 0 && <button className="button is-black" onClick={this.handleShuffleBlackCardsClick}>Shuffle black cards</button>}
+        <h3 className="title is-4">Room ID: {this.props.room.id}</h3>
+
+        <div className="buttons">
+          {this.props.room.blackCards.length > 0 && <button className="button is-black" onClick={this.handleShuffleBlackCardsClick}>Shuffle black cards</button>}
+          {this.props.room.whiteCards.length > 0 && <button className="button" onClick={this.handleShuffleWhiteCardsClick}>Shuffle white cards</button>}
+        </div>
 
         <hr/>
 

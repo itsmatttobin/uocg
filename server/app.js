@@ -17,11 +17,12 @@ function updateRoom(id) {
 
 function initRoom(id) {
   rooms[id] = {
-    blackCards,
-    whiteCards,
+    id,
+    blackCards: shuffleCards(blackCards),
+    whiteCards: shuffleCards(whiteCards),
     players: [],
     currentCard: null,
-    playedCards: []
+    playedCards: [],
   };
 }
 
