@@ -1,6 +1,8 @@
 import React, { ChangeEvent } from 'react';
 import './App.css';
 import socketIOClient from 'socket.io-client';
+import PLAYER_STATE from './definitions/player-state';
+import Room from './definitions/room';
 
 export default class App extends React.Component<{}, StateType> {
   state: StateType = {
@@ -55,6 +57,14 @@ export default class App extends React.Component<{}, StateType> {
     return this.state.room.players && this.state.room.players.map((player: any) => <li key={player.id}>{player.name}</li>);
   }
 
+  renderWhiteCards = () => {
+    return this.state.room.whiteCards.map(card => <li>{card}</li>);
+  }
+
+  handleShuffleWhiteCardsClick = () => {
+    this.socket.emit('shuffle white cards', this.state.roomId);
+  }
+
   render() {
     return (
       <div>
@@ -66,6 +76,11 @@ export default class App extends React.Component<{}, StateType> {
         <hr/>
 
         {this.state.playerState === PLAYER_STATE.JOINED_ROOM && this.renderPlayerList()}
+
+        <hr/>
+
+        {this.state.room.whiteCards.length > 0 && <button onClick={this.handleShuffleWhiteCardsClick}>Shuffle</button>}
+        {this.state.room.whiteCards.length > 0 && this.renderWhiteCards()}
       </div>
     );
   }
@@ -77,26 +92,4 @@ interface StateType {
   name: string;
   room: Room;
   playerState: PLAYER_STATE;
-}
-
-interface Room {
-  blackCards: BlackCard[];
-  whiteCards: string[];
-  players: Player[];
-}
-
-interface BlackCard {
-  text: string;
-  pick: number;
-}
-
-interface Player {
-  id: string;
-  name: string;
-  hand: string[];
-}
-
-enum PLAYER_STATE {
-  NOT_IN_ROOM,
-  JOINED_ROOM,
 }

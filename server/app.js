@@ -7,6 +7,7 @@ const whiteCards = require('./data/white-cards');
 const rooms = {};
 
 function updateRoom(id) {
+  // Emit to all clients in a room
   io.to(id).emit('update room', rooms[id]);
 }
 
@@ -28,7 +29,28 @@ function addPlayerToRoom(socket, name, roomId) {
   rooms[roomId].players.push(player);
 }
 
+function shuffleCards(cards) {
+  let currentIndex = cards.length;
+  let temporaryValue;
+  let randomIndex;
+
+	// While there cards left to shuffle
+	while (0 !== currentIndex) {
+		// Pick a remaining card
+		randomIndex = Math.floor(Math.random() * currentIndex);
+		currentIndex -= 1;
+
+		// And swap it with the current card
+		temporaryValue = cards[currentIndex];
+		cards[currentIndex] = cards[randomIndex];
+		cards[randomIndex] = temporaryValue;
+	}
+
+	return cards;
+}
+
 io.on('connection', (socket) => {
+  // Allow a client to be in one room at a time
   let previousId;
   const safeJoin = currentId => {
     socket.leave(previousId);
@@ -45,6 +67,16 @@ io.on('connection', (socket) => {
     }
 
     addPlayerToRoom(socket, name, id);
+    updateRoom(id);
+  });
+
+  socket.on('shuffle white cards', id => {
+    rooms[id].whiteCards = shuffleCards(rooms[id].whiteCards);
+    updateRoom(id);
+  });
+
+  socket.on('shuffle black cards', id => {
+    rooms[id].blackCards = shuffleCards(rooms[id].blackCards);
     updateRoom(id);
   });
 
