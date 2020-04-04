@@ -76,6 +76,18 @@ io.on('connection', (socket) => {
     updateRoom(id);
   });
 
+  socket.on('leave room', (playerId, roomId) => {
+    const player = rooms[roomId] && rooms[roomId].players.find(player => player.id === playerId);
+
+    if (player) {
+      const index = rooms[roomId].players.indexOf(player);
+      rooms[roomId].players.splice(index, 1);
+    }
+
+    socket.leave(roomId);
+    updateRoom(roomId);
+  });
+
   socket.on('shuffle white cards', id => {
     rooms[id].whiteCards = shuffleCards(rooms[id].whiteCards);
     updateRoom(id);
@@ -107,7 +119,7 @@ io.on('connection', (socket) => {
     const foundCard = rooms[id].playedCards.find(card => card.text === cardToReveal.text);
     foundCard.revealed = !foundCard.revealed;
     updateRoom(id);
-  })
+  });
 
   // TODO: Remove player from room
   // TODO: Delete room data on disconnect of all clients

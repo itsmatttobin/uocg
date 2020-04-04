@@ -20,13 +20,27 @@ export default class App extends React.Component<{}, StateType> {
       playedCards: [],
     },
     playerState: PLAYER_STATE.NOT_IN_ROOM,
+    socketId: '',
   }
 
   socket = socketIOClient(this.state.host);
 
   componentDidMount = () => {
+    this.socket.on('connect', () => {
+      this.setState({ socketId: this.socket.id });
+    });
+
+    // Watch for changes when the current room updates
     this.socket.on('update room', (room: any) => {
       this.setState({ room, playerState: PLAYER_STATE.JOINED_ROOM });
+    });
+
+    // Remove player from the room when leaving
+    window.addEventListener('unload', () => {
+      if (this.hasPlayerJoinedRoom()) {
+        // TODO: Add white cards back to the deck
+        this.socket.emit('leave room', this.state.socketId, this.state.roomId);
+      }
     });
   }
 
@@ -66,4 +80,5 @@ interface StateType {
   name: string;
   room: Room;
   playerState: PLAYER_STATE;
+  socketId: string;
 }
