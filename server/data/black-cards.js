@@ -235,14 +235,14 @@ const blackCards = [
     text: 'What\'s my anti-drug?',
     pick: 1,
   },
-  {
-    text: 'And the Academy Award for ___ goes to ___.',
-    pick: 2,
-  },
-  {
-    text: 'For my next trick, I will pull ___ out of ___.',
-    pick: 2,
-  },
+  // {
+  //   text: 'And the Academy Award for ___ goes to ___.',
+  //   pick: 2,
+  // },
+  // {
+  //   text: 'For my next trick, I will pull ___ out of ___.',
+  //   pick: 2,
+  // },
   {
     text: '___: Good to the last drop.',
     pick: 1,
@@ -259,50 +259,50 @@ const blackCards = [
     text: 'What gets better with age?',
     pick: 1,
   },
-  {
-    text: 'I never truly understood ___ until I encountered ___.',
-    pick: 2,
-  },
-  {
-    text: 'Rumor has it that Vladimir Putin\'s favorite delicacy is ___ stuffed with ___.',
-    pick: 2,
-  },
-  {
-    text: 'Lifetime® presents ___, the story of ___.',
-    pick: 2,
-  },
-  {
-    text: 'Make a haiku.',
-    pick: 3,
-  },
-  {
-    text: 'In M. Night Shyamalan\'s new movie, Bruce Willis discovers that ___ had really been ___ all along.',
-    pick: 2,
-  },
-  {
-    text: '___ is a slippery slope that leads to ___.',
-    pick: 2,
-  },
-  {
-    text: 'In a world ravaged by ___, our only solace is ___.',
-    pick: 2,
-  },
-  {
-    text: 'That\'s right, I killed ___. How, you ask? ___.',
-    pick: 2,
-  },
-  {
-    text: 'When I was tripping on acid, ___ turned into ___.',
-    pick: 2,
-  },
-  {
-    text: '___ + ___ = ___.',
-    pick: 3,
-  },
-  {
-    text: 'What\'s the next superhero/sidekick duo?',
-    pick: 2,
-  },
+  // {
+  //   text: 'I never truly understood ___ until I encountered ___.',
+  //   pick: 2,
+  // },
+  // {
+  //   text: 'Rumor has it that Vladimir Putin\'s favorite delicacy is ___ stuffed with ___.',
+  //   pick: 2,
+  // },
+  // {
+  //   text: 'Lifetime® presents ___, the story of ___.',
+  //   pick: 2,
+  // },
+  // {
+  //   text: 'Make a haiku.',
+  //   pick: 3,
+  // },
+  // {
+  //   text: 'In M. Night Shyamalan\'s new movie, Bruce Willis discovers that ___ had really been ___ all along.',
+  //   pick: 2,
+  // },
+  // {
+  //   text: '___ is a slippery slope that leads to ___.',
+  //   pick: 2,
+  // },
+  // {
+  //   text: 'In a world ravaged by ___, our only solace is ___.',
+  //   pick: 2,
+  // },
+  // {
+  //   text: 'That\'s right, I killed ___. How, you ask? ___.',
+  //   pick: 2,
+  // },
+  // {
+  //   text: 'When I was tripping on acid, ___ turned into ___.',
+  //   pick: 2,
+  // },
+  // {
+  //   text: '___ + ___ = ___.',
+  //   pick: 3,
+  // },
+  // {
+  //   text: 'What\'s the next superhero/sidekick duo?',
+  //   pick: 2,
+  // },
   {
     text: 'Dear Abby, I\'m having some trouble with ___ and would like your advice.',
     pick: 1,
@@ -327,10 +327,10 @@ const blackCards = [
     text: 'Next on ESPN2, the World Series of ___.',
     pick: 1,
   },
-  {
-    text: 'Step 1: ___. Step 2: ___. Step 3: Profit.',
-    pick: 2,
-  },
+  // {
+  //   text: 'Step 1: ___. Step 2: ___. Step 3: Profit.',
+  //   pick: 2,
+  // },
   {
     text: 'Here is the church. Here is the steeple. Open the doors. And there is ___.',
     pick: 1,
