@@ -30,7 +30,7 @@ export default class Hand extends React.Component<IPropsType, IStateType> {
         <h3 className="title is-4">Your hand</h3>
 
         <div className="button-section">
-          <button className="button" onClick={this.handleDrawCardClick}>Draw white card</button>
+          <button className="button" onClick={this.handleDrawCardClick}>Draw answer card</button>
         </div>
 
         <div className="columns is-multiline">

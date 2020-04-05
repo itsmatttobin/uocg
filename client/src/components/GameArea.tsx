@@ -20,13 +20,13 @@ export default class GameArea extends React.Component<IPropsType> {
 
         <div className="buttons">
           {this.props.room.blackCards.length > 0 && (
-            <button className="button is-black" onClick={this.handleShuffleBlackCardsClick}>
-              Shuffle black cards
+            <button className="button is-info" onClick={this.handleShuffleBlackCardsClick}>
+              Shuffle question cards
             </button>
           )}
           {this.props.room.whiteCards.length > 0 && (
             <button className="button" onClick={this.handleShuffleWhiteCardsClick}>
-              Shuffle white cards
+              Shuffle answer cards
             </button>
           )}
         </div>

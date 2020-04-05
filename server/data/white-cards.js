@@ -152,7 +152,7 @@ const whiteCards = [
   'The inevitable heat death of the universe.',
   'The folly of man.',
   'That thing that electrocutes your abs.',
-  'Cards Against Humanity.',
+  'Untitled Offensive Card Game.',
   'Fiery poops.',
   'Poor people.',
   'Edible underpants.',
