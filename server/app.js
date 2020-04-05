@@ -1,11 +1,10 @@
 const app = require('express')();
+const cors = require('cors');
+app.use(cors());
 const http = require('http').createServer(app);
 const io = require('socket.io')(http);
-const cors = require('cors');
 const blackCards = require('./data/black-cards');
 const whiteCards = require('./data/white-cards');
-
-app.use(cors());
 
 const rooms = {};
 
