@@ -6,6 +6,8 @@ import IRoom from './definitions/room';
 import PlayerList from './components/PlayerList';
 import JoinGame from './components/JoinGame';
 import GameArea from './components/GameArea';
+import Header from './components/Header';
+import Footer from './components/Footer';
 
 export default class App extends React.Component<{}, IStateType> {
   state: IStateType = {
@@ -56,6 +58,8 @@ export default class App extends React.Component<{}, IStateType> {
   render() {
     return (
       <div className="app">
+        <Header/>
+
         {!this.hasPlayerJoinedRoom() && <JoinGame onJoinRoom={this.handleJoinRoom} />}
 
         {this.hasPlayerJoinedRoom() && (
@@ -69,7 +73,7 @@ export default class App extends React.Component<{}, IStateType> {
           </div>
         )}
 
-        {/* TODO: Footer w/ CAH credit */}
+        <Footer/>
       </div>
     );
   }
