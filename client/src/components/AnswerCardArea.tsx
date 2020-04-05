@@ -9,6 +9,10 @@ export default class AnswerCardArea extends React.Component<IPropsType> {
     this.props.socket.emit(EVENTS.REVEAL_CARD, this.props.roomId, card);
   }
 
+  handleChooseCardClick = (card: IAnswerCardType) => {
+    this.props.socket.emit(EVENTS.CHOOSE_WINNING_CARD, this.props.roomId, card, this.props.room.currentCard);
+  }
+
   render() {
     return (
       <div>
@@ -17,7 +21,7 @@ export default class AnswerCardArea extends React.Component<IPropsType> {
         <div className="columns is-multiline">
           {this.props.room.answerCards.map((card, index) => (
             <div  key={index} className="column is-one-quarter">
-              <AnswerCard card={card} onCardClick={this.handleCardClick} />
+              <AnswerCard card={card} onCardClick={this.handleCardClick} onChooseCardClick={this.handleChooseCardClick} />
             </div>
           ))}
         </div>
