@@ -90,6 +90,10 @@ export default class App extends React.Component<{}, IStateType> {
     });
   }
 
+  handleRestartGame = () => {
+    this.socket.emit(EVENTS.RESTART_GAME, this.state.roomId);
+  }
+
   render() {
     return (
       <div className="wrapper">
@@ -104,7 +108,7 @@ export default class App extends React.Component<{}, IStateType> {
                 <GameArea socket={this.socket} roomId={this.state.roomId} room={this.state.room} />
               </div>
               <div className="column is-2">
-                <PlayerList players={this.state.room.players} />
+                <PlayerList players={this.state.room.players} onRestartGame={this.handleRestartGame} />
               </div>
             </div>
           )}

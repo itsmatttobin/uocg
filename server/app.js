@@ -16,8 +16,8 @@ function updateRoom(id) {
 function initRoom(id) {
   rooms[id] = {
     id,
-    blackCards: shuffleCards(blackCards),
-    whiteCards: shuffleCards(whiteCards),
+    blackCards: shuffleCards(JSON.parse(JSON.stringify(blackCards))),
+    whiteCards: shuffleCards(JSON.parse(JSON.stringify(whiteCards))),
     players: [],
     currentCard: null,
     answerCards: [],
@@ -92,16 +92,6 @@ io.on('connection', socket => {
     }
   });
 
-  socket.on('SHUFFLE_WHITE_CARDS', id => {
-    rooms[id].whiteCards = shuffleCards(rooms[id].whiteCards);
-    updateRoom(id);
-  });
-
-  socket.on('SHUFFLE_BLACK_CARDS', id => {
-    rooms[id].blackCards = shuffleCards(rooms[id].blackCards);
-    updateRoom(id);
-  });
-
   socket.on('DRAW_WHITE_CARD', id => {
     rooms[id].whiteCards.shift();
     updateRoom(id);
@@ -133,6 +123,20 @@ io.on('connection', socket => {
 
     updateRoom(id);
     io.to(id).emit('END_OF_ROUND', player, currentCard, card);
+  });
+
+  socket.on('RESTART_GAME', id => {
+    rooms[id].whiteCards = shuffleCards(JSON.parse(JSON.stringify(whiteCards)));
+    rooms[id].blackCards = shuffleCards(JSON.parse(JSON.stringify(blackCards)));
+    rooms[id].currentCard = null;
+    rooms[id].answerCards = [];
+    rooms[id].players = rooms[id].players.map(player => ({
+      ...player,
+      wonCards: [],
+    }));
+
+    io.to(id).emit('GAME_RESTARTED');
+    updateRoom(id);
   });
 });
 

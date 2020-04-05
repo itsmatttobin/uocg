@@ -1,7 +1,11 @@
 import React from 'react';
 import IPlayer from '../definitions/player';
 
-export default class PlayerList extends React.Component<IPropsType> {
+export default class PlayerList extends React.Component<IPropsType, IStateType> {
+  state: IStateType = {
+    restartConfirm: false,
+  };
+
   renderPlayer = () => this.props.players && this.props.players.map((player: IPlayer) => (
     <li key={player.id}>
       <div className="columns">
@@ -14,6 +18,19 @@ export default class PlayerList extends React.Component<IPropsType> {
       </div>
     </li>
   ))
+
+  handleRestartGameClick = () => {
+    this.setState({ restartConfirm: true });
+  }
+
+  handleRestartGameConfirm = () => {
+    this.props.onRestartGame();
+    this.setState({ restartConfirm: false });
+  }
+
+  handleRestartGameCancel = () => {
+    this.setState({ restartConfirm: false });
+  }
 
   render() {
     return (
@@ -32,6 +49,23 @@ export default class PlayerList extends React.Component<IPropsType> {
           {!this.props.players.length && <li>No players</li>}
           {this.renderPlayer()}
         </ul>
+
+        <hr/>
+
+        {!this.state.restartConfirm && (
+          <button className="button is-danger is-fullwidth" onClick={this.handleRestartGameClick}>Restart game</button>
+        )}
+
+        {this.state.restartConfirm && (
+          <div className="columns">
+            <div className="column">
+              <div className="button is-success is-fullwidth" onClick={this.handleRestartGameConfirm}>Confirm</div>
+            </div>
+            <div className="column">
+              <div className="button is-danger is-fullwidth" onClick={this.handleRestartGameCancel}>Cancel</div>
+            </div>
+          </div>
+        )}
       </div>
     );
   }
@@ -39,4 +73,9 @@ export default class PlayerList extends React.Component<IPropsType> {
 
 interface IPropsType {
   players: IPlayer[];
+  onRestartGame: () => void;
+}
+
+interface IStateType {
+  restartConfirm: boolean;
 }

@@ -8,6 +8,12 @@ export default class Hand extends React.Component<IPropsType, IStateType> {
     whiteCards: [],
   };
 
+  componentDidMount = () => {
+    this.props.socket.on(EVENTS.GAME_RESTARTED, () => {
+      this.setState({ whiteCards: [] });
+    });
+  }
+
   handleDrawCardClick = () => {
     if (this.state.whiteCards.length < 10) {
       this.setState({ whiteCards: [...this.state.whiteCards, this.props.room.whiteCards[0]] });
