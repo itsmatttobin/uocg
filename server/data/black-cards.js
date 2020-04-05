@@ -52,7 +52,7 @@ const blackCards = [
     pick: 1,
   },
   {
-    text: 'What\'s the next Happy Meal&reg; toy?',
+    text: 'What\'s the next Happy Meal® toy?',
     pick: 1,
   },
   {
@@ -96,7 +96,7 @@ const blackCards = [
     pick: 1,
   },
   {
-    text: 'War!<br><br>What is it good for?',
+    text: 'War! What is it good for?',
     pick: 1,
   },
   {
@@ -268,7 +268,7 @@ const blackCards = [
     pick: 2,
   },
   {
-    text: 'Lifetime&reg; presents _, the story of _.',
+    text: 'Lifetime® presents _, the story of _.',
     pick: 2,
   },
   {
@@ -304,7 +304,7 @@ const blackCards = [
     pick: 2,
   },
   {
-    text: 'Dear Abby,<br><br>I\'m having some trouble with _ and would like your advice.',
+    text: 'Dear Abby, I\'m having some trouble with _ and would like your advice.',
     pick: 1,
   },
   {
@@ -332,7 +332,7 @@ const blackCards = [
     pick: 2,
   },
   {
-    text: 'Here is the church<br>Here is the steeple<br>Open the doors<br>And there is _.',
+    text: 'Here is the church. Here is the steeple. Open the doors. And there is _.',
     pick: 1,
   },
   {
@@ -340,7 +340,7 @@ const blackCards = [
     pick: 1,
   },
   {
-    text: 'During his childhood, Salvador Dal&iacute; produced hundreds of paintings of _.',
+    text: 'During his childhood, Salvador Dalí produced hundreds of paintings of _.',
     pick: 1,
   },
   {
