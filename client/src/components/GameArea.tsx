@@ -3,14 +3,15 @@ import IRoom from '../definitions/room';
 import Hand from './Hand';
 import CurrentCard from './CurrentCard';
 import AnswerCardArea from './AnswerCardArea';
+import EVENTS from '../definitions/events';
 
 export default class GameArea extends React.Component<IPropsType> {
   handleShuffleWhiteCardsClick = () => {
-    this.props.socket.emit('shuffle white cards', this.props.roomId);
+    this.props.socket.emit(EVENTS.SHUFFLE_WHITE_CARDS, this.props.roomId);
   }
 
   handleShuffleBlackCardsClick = () => {
-    this.props.socket.emit('shuffle black cards', this.props.roomId);
+    this.props.socket.emit(EVENTS.SHUFFLE_BLACK_CARDS, this.props.roomId);
   }
 
   render() {

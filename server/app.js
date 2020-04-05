@@ -10,7 +10,7 @@ const rooms = {};
 
 function updateRoom(id) {
   // Emit room data to all clients in a room
-  io.to(id).emit('update room', rooms[id]);
+  io.to(id).emit('UPDATE_ROOM', rooms[id]);
 }
 
 function initRoom(id) {
@@ -63,7 +63,7 @@ io.on('connection', (socket) => {
     previousId = currentId;
   };
 
-  socket.on('join room', (id, name) => {
+  socket.on('JOIN_ROOM', (id, name) => {
     safeJoin(id);
 
     // Create a new room if one doesn't already exist
@@ -75,7 +75,7 @@ io.on('connection', (socket) => {
     updateRoom(id);
   });
 
-  socket.on('leave room', (playerId, roomId) => {
+  socket.on('LEAVE_ROOM', (playerId, roomId) => {
     const player = rooms[roomId] && rooms[roomId].players.find(player => player.id === playerId);
 
     if (player) {
@@ -85,42 +85,45 @@ io.on('connection', (socket) => {
 
     socket.leave(roomId);
     updateRoom(roomId);
+
+    // Delete room data if room is empty
+    if (rooms[roomId] && !rooms[roomId].players.length) {
+      delete rooms[roomId];
+    }
   });
 
-  socket.on('shuffle white cards', id => {
+  socket.on('SHUFFLE_WHITE_CARDS', id => {
     rooms[id].whiteCards = shuffleCards(rooms[id].whiteCards);
     updateRoom(id);
   });
 
-  socket.on('shuffle black cards', id => {
+  socket.on('SHUFFLE_BLACK_CARDS', id => {
     rooms[id].blackCards = shuffleCards(rooms[id].blackCards);
     updateRoom(id);
   });
 
-  socket.on('draw white card', id => {
+  socket.on('DRAW_WHITE_CARD', id => {
     rooms[id].whiteCards.shift();
     updateRoom(id);
   });
 
-  socket.on('draw black card', id => {
+  socket.on('DRAW_BLACK_CARD', id => {
     rooms[id].currentCard = rooms[id].blackCards[0];
     rooms[id].blackCards.shift();
     rooms[id].answerCards = [];
     updateRoom(id);
   });
 
-  socket.on('play card', (id, card) => {
+  socket.on('PLAY_CARD', (id, card) => {
     rooms[id].answerCards.push({ text: card, revealed: false });
     updateRoom(id);
   });
 
-  socket.on('reveal card', (id, cardToReveal) => {
+  socket.on('REVEAL_CARD', (id, cardToReveal) => {
     const foundCard = rooms[id].answerCards.find(card => card.text === cardToReveal.text);
     foundCard.revealed = !foundCard.revealed;
     updateRoom(id);
   });
-
-  // TODO: Delete room data on disconnect of all clients
 });
 
 http.listen(4000, () => {
