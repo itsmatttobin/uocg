@@ -1,6 +1,6 @@
 @import "../node_modules/bulma/sass/utilities/initial-variables.sass";
 
-.app {
+.wrapper {
   max-width: 1680px;
   margin: 0 auto;
   padding: 40px;
@@ -8,6 +8,10 @@
 
 .header {
   margin-bottom: 1.5rem;
+}
+
+.main {
+  min-height: calc(100vh - 267px);
 }
 
 .uocg-card {
@@ -55,6 +59,6 @@
 
 .uocg-footer {
   background: none;
-  font-size: 0.8rem;
+  font-size: 0.6rem;
   padding-top: 6rem;
 }

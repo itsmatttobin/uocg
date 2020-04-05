@@ -2,7 +2,7 @@ import React from 'react';
 
 const Footer = () => (
   <div className="uocg-footer">
-    <div className="content has-text-centered">
+    <div className="content has-text-right">
       <p>
         UOCG is not affiliated with <a className="has-text-info" href="https://cardsagainsthumanity.com/">Cards Against Humanity.</a><br/>
         Cards Against Humanity is made available under a Creative Commons BY-NC-SA 2.0 license.<br/>
