@@ -2,10 +2,11 @@ import React from 'react';
 import IRoom from '../definitions/room';
 import AnswerCard from './AnswerCard';
 import IAnswerCardType from '../definitions/answer-card';
+import EVENTS from '../definitions/events';
 
 export default class AnswerCardArea extends React.Component<IPropsType> {
   handleCardClick = (card: IAnswerCardType) => {
-    this.props.socket.emit('reveal card', this.props.roomId, card);
+    this.props.socket.emit(EVENTS.REVEAL_CARD, this.props.roomId, card);
   }
 
   render() {

@@ -8,6 +8,7 @@ import JoinGame from './components/JoinGame';
 import GameArea from './components/GameArea';
 import Header from './components/Header';
 import Footer from './components/Footer';
+import EVENTS from './definitions/events';
 
 export default class App extends React.Component<{}, IStateType> {
   state: IStateType = {
@@ -34,7 +35,7 @@ export default class App extends React.Component<{}, IStateType> {
     });
 
     // Watch for changes when the current room updates
-    this.socket.on('update room', (room: any) => {
+    this.socket.on(EVENTS.UPDATE_ROOM, (room: any) => {
       this.setState({ room, playerState: PLAYER_STATE.JOINED_ROOM });
     });
 
@@ -42,14 +43,14 @@ export default class App extends React.Component<{}, IStateType> {
     window.addEventListener('unload', () => {
       if (this.hasPlayerJoinedRoom()) {
         // TODO: Add white cards back to the deck
-        this.socket.emit('leave room', this.state.socketId, this.state.roomId);
+        this.socket.emit(EVENTS.LEAVE_ROOM, this.state.socketId, this.state.roomId);
       }
     });
   }
 
   handleJoinRoom = (roomId: string, name: string) => {
     this.setState({ roomId, name }, () => {
-      this.socket.emit('join room', this.state.roomId, this.state.name);
+      this.socket.emit(EVENTS.JOIN_ROOM, this.state.roomId, this.state.name);
     });
   }
 

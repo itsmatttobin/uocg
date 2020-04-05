@@ -1,6 +1,7 @@
 import React from 'react';
 import IRoom from '../definitions/room';
 import WhiteCard from './WhiteCard';
+import EVENTS from '../definitions/events';
 
 export default class Hand extends React.Component<IPropsType, IStateType> {
   state: IStateType = {
@@ -10,7 +11,7 @@ export default class Hand extends React.Component<IPropsType, IStateType> {
   handleDrawCardClick = () => {
     if (this.state.whiteCards.length < 10) {
       this.setState({ whiteCards: [...this.state.whiteCards, this.props.room.whiteCards[0]] });
-      this.props.socket.emit('draw white card', this.props.roomId);
+      this.props.socket.emit(EVENTS.DRAW_WHITE_CARD, this.props.roomId);
     }
   }
 
@@ -20,9 +21,11 @@ export default class Hand extends React.Component<IPropsType, IStateType> {
     hand.splice(index, 1);
 
     this.setState({ whiteCards: hand }, () => {
-      this.props.socket.emit('play card', this.props.roomId, card);
+      this.props.socket.emit(EVENTS.PLAY_CARD, this.props.roomId, card);
     });
   }
+
+  isDrawCardDisabled = () => this.state.whiteCards.length === 10;
 
   render() {
     return (
@@ -30,7 +33,7 @@ export default class Hand extends React.Component<IPropsType, IStateType> {
         <h3 className="title is-4">Your hand</h3>
 
         <div className="button-section">
-          <button className="button" onClick={this.handleDrawCardClick}>Draw answer card</button>
+          <button className="button" onClick={this.handleDrawCardClick} disabled={this.isDrawCardDisabled()}>Draw answer card</button>
         </div>
 
         <div className="columns is-multiline">
