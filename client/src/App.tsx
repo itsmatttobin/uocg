@@ -6,6 +6,8 @@ import IRoom from './definitions/room';
 import PlayerList from './components/PlayerList';
 import JoinGame from './components/JoinGame';
 import GameArea from './components/GameArea';
+import Header from './components/Header';
+import Footer from './components/Footer';
 
 export default class App extends React.Component<{}, IStateType> {
   state: IStateType = {
@@ -55,21 +57,25 @@ export default class App extends React.Component<{}, IStateType> {
 
   render() {
     return (
-      <div className="app">
-        {!this.hasPlayerJoinedRoom() && <JoinGame onJoinRoom={this.handleJoinRoom} />}
+      <div className="wrapper">
+        <Header/>
 
-        {this.hasPlayerJoinedRoom() && (
-          <div className="columns">
-            <div className="column">
-              <GameArea socket={this.socket} roomId={this.state.roomId} room={this.state.room} />
-            </div>
-            <div className="column is-2">
-              <PlayerList players={this.state.room.players} />
-            </div>
-          </div>
-        )}
+        <div className="main">
+          {!this.hasPlayerJoinedRoom() && <JoinGame onJoinRoom={this.handleJoinRoom} />}
 
-        {/* TODO: Footer w/ CAH credit */}
+          {this.hasPlayerJoinedRoom() && (
+            <div className="columns">
+              <div className="column">
+                <GameArea socket={this.socket} roomId={this.state.roomId} room={this.state.room} />
+              </div>
+              <div className="column is-2">
+                <PlayerList players={this.state.room.players} />
+              </div>
+            </div>
+          )}
+        </div>
+
+        <Footer/>
       </div>
     );
   }

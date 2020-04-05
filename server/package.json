@@ -1,6 +1,6 @@
 {
-  "name": "cah-server",
-  "version": "0.2.2",
+  "name": "uocg-server",
+  "version": "0.3.0",
   "private": true,
   "scripts": {
     "start": "node app.js",
