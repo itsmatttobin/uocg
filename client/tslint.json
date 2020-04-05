@@ -15,7 +15,8 @@
     "arrow-return-shorthand": [true, "multiline"],
     "max-line-length": [true, 140],
     "semicolon": [true, "always"],
-    "no-trailing-whitespace": true
+    "no-trailing-whitespace": true,
+    "no-any": [true, {"ignore-rest-args": true}]
   },
   "linterOptions": {
     "exclude": [

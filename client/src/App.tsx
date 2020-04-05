@@ -9,6 +9,11 @@ import GameArea from './components/GameArea';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import EVENTS from './definitions/events';
+import IPlayer from './definitions/player';
+import IAnswerCard from './definitions/answer-card';
+import IBlackCard from './definitions/black-card';
+import IRoundModal from './definitions/round-modal';
+import RoundModal from './components/RoundModal';
 
 export default class App extends React.Component<{}, IStateType> {
   state: IStateType = {
@@ -25,6 +30,12 @@ export default class App extends React.Component<{}, IStateType> {
     },
     playerState: PLAYER_STATE.NOT_IN_ROOM,
     socketId: '',
+    roundModal: {
+      open: false,
+      player: null,
+      question: null,
+      answer: null,
+    },
   };
 
   socket = socketIOClient(this.state.host);
@@ -35,7 +46,7 @@ export default class App extends React.Component<{}, IStateType> {
     });
 
     // Watch for changes when the current room updates
-    this.socket.on(EVENTS.UPDATE_ROOM, (room: any) => {
+    this.socket.on(EVENTS.UPDATE_ROOM, (room: IRoom) => {
       this.setState({ room, playerState: PLAYER_STATE.JOINED_ROOM });
     });
 
@@ -46,6 +57,18 @@ export default class App extends React.Component<{}, IStateType> {
         this.socket.emit(EVENTS.LEAVE_ROOM, this.state.socketId, this.state.roomId);
       }
     });
+
+    // Display round winner
+    this.socket.on(EVENTS.END_OF_ROUND, (player: IPlayer, question: IBlackCard, answer: IAnswerCard) => {
+      this.setState({
+        roundModal: {
+          open: true,
+          player,
+          question,
+          answer,
+        },
+      });
+    });
   }
 
   handleJoinRoom = (roomId: string, name: string) => {
@@ -55,6 +78,17 @@ export default class App extends React.Component<{}, IStateType> {
   }
 
   hasPlayerJoinedRoom = () => this.state.playerState === PLAYER_STATE.JOINED_ROOM;
+
+  handleModalContinue = () => {
+    this.setState({
+      roundModal: {
+        open: false,
+        player: null,
+        question: null,
+        answer: null,
+      },
+    });
+  }
 
   render() {
     return (
@@ -76,6 +110,8 @@ export default class App extends React.Component<{}, IStateType> {
           )}
         </div>
 
+        <RoundModal modal={this.state.roundModal} onContinueClick={this.handleModalContinue} />
+
         <Footer/>
       </div>
     );
@@ -89,4 +125,5 @@ interface IStateType {
   room: IRoom;
   playerState: PLAYER_STATE;
   socketId: string;
+  roundModal: IRoundModal;
 }

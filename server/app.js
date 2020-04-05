@@ -54,7 +54,7 @@ function shuffleCards(cards) {
   return cards;
 }
 
-io.on('connection', (socket) => {
+io.on('connection', socket => {
   // Allow a client to be in one room at a time
   let previousId;
   const safeJoin = currentId => {
@@ -115,7 +115,7 @@ io.on('connection', (socket) => {
   });
 
   socket.on('PLAY_CARD', (id, card) => {
-    rooms[id].answerCards.push({ text: card, revealed: false });
+    rooms[id].answerCards.push({ text: card, revealed: false, playerId: socket.id });
     updateRoom(id);
   });
 
@@ -123,6 +123,16 @@ io.on('connection', (socket) => {
     const foundCard = rooms[id].answerCards.find(card => card.text === cardToReveal.text);
     foundCard.revealed = !foundCard.revealed;
     updateRoom(id);
+  });
+
+  socket.on('CHOOSE_WINNING_CARD', (id, card, currentCard) => {
+    const player = rooms[id].players.find(player => player.id === card.playerId);
+    if (player) {
+      player.wonCards.push(currentCard);
+    }
+
+    updateRoom(id);
+    io.to(id).emit('END_OF_ROUND', player, currentCard, card);
   });
 });
 
