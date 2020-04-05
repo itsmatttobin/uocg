@@ -4,7 +4,7 @@ const blackCards = [
     pick: 1,
   },
   {
-    text: 'I got 99 problems but _ ain\'t one.',
+    text: 'I got 99 problems but ___ ain\'t one.',
     pick: 1,
   },
   {
@@ -16,7 +16,7 @@ const blackCards = [
     pick: 1,
   },
   {
-    text: 'This is the way the world ends / This is the way the world ends / Not with a bang but with _.',
+    text: 'This is the way the world ends / This is the way the world ends / Not with a bang but with ___.',
     pick: 1,
   },
   {
@@ -24,7 +24,7 @@ const blackCards = [
     pick: 1,
   },
   {
-    text: 'TSA guidelines now prohibit _ on airplanes.',
+    text: 'TSA guidelines now prohibit ___ on airplanes.',
     pick: 1,
   },
   {
@@ -32,19 +32,19 @@ const blackCards = [
     pick: 1,
   },
   {
-    text: 'MTV\'s new reality show features eight washed-up celebrities living with _.',
+    text: 'MTV\'s new reality show features eight washed-up celebrities living with ___.',
     pick: 1,
   },
   {
-    text: 'I drink to forget _.',
+    text: 'I drink to forget ___.',
     pick: 1,
   },
   {
-    text: 'I\'m sorry, Professor, but I couldn\'t complete my homework because of _.',
+    text: 'I\'m sorry, Professor, but I couldn\'t complete my homework because of ___.',
     pick: 1,
   },
   {
-    text: 'Alternative medicine is now embracing the curative powers of _.',
+    text: 'Alternative medicine is now embracing the curative powers of ___.',
     pick: 1,
   },
   {
@@ -56,15 +56,15 @@ const blackCards = [
     pick: 1,
   },
   {
-    text: 'It\'s a pity that kids these days are all getting involved with _.',
+    text: 'It\'s a pity that kids these days are all getting involved with ___.',
     pick: 1,
   },
   {
-    text: 'In the new Disney Channel Original Movie, Hannah Montana struggles with _ for the first time.',
+    text: 'In the new Disney Channel Original Movie, Hannah Montana struggles with ___ for the first time.',
     pick: 1,
   },
   {
-    text: '_. That\'s how I want to die.',
+    text: '___. That\'s how I want to die.',
     pick: 1,
   },
   {
@@ -76,23 +76,23 @@ const blackCards = [
     pick: 1,
   },
   {
-    text: 'Instead of coal, Santa now gives the bad children _.',
+    text: 'Instead of coal, Santa now gives the bad children ___.',
     pick: 1,
   },
   {
-    text: 'Next from J.K. Rowling: Harry Potter and the Chamber of _.',
+    text: 'Next from J.K. Rowling: Harry Potter and the Chamber of ___.',
     pick: 1,
   },
   {
-    text: 'A romantic, candlelit dinner would be incomplete without _.',
+    text: 'A romantic, candlelit dinner would be incomplete without ___.',
     pick: 1,
   },
   {
-    text: 'White people like _.',
+    text: 'White people like ___.',
     pick: 1,
   },
   {
-    text: '_. Betcha can\'t have just one!',
+    text: '___. Betcha can\'t have just one!',
     pick: 1,
   },
   {
@@ -100,15 +100,15 @@ const blackCards = [
     pick: 1,
   },
   {
-    text: 'BILLY MAYS HERE FOR _.',
+    text: 'BILLY MAYS HERE FOR ___.',
     pick: 1,
   },
   {
-    text: '_. High five, bro.',
+    text: '___. High five, bro.',
     pick: 1,
   },
   {
-    text: 'During sex, I like to think about _.',
+    text: 'During sex, I like to think about ___.',
     pick: 1,
   },
   {
@@ -140,11 +140,11 @@ const blackCards = [
     pick: 1,
   },
   {
-    text: 'Major League Baseball has banned _ for giving players an unfair advantage.',
+    text: 'Major League Baseball has banned ___ for giving players an unfair advantage.',
     pick: 1,
   },
   {
-    text: 'When I am a billionaire, I shall erect a 50-foot statue to commemorate _.',
+    text: 'When I am a billionaire, I shall erect a 50-foot statue to commemorate ___.',
     pick: 1,
   },
   {
@@ -152,11 +152,11 @@ const blackCards = [
     pick: 1,
   },
   {
-    text: 'When I am the President of the United States, I will create the Department of _.',
+    text: 'When I am the President of the United States, I will create the Department of ___.',
     pick: 1,
   },
   {
-    text: '_. It\'s a trap!',
+    text: '___. It\'s a trap!',
     pick: 1,
   },
   {
@@ -168,11 +168,11 @@ const blackCards = [
     pick: 1,
   },
   {
-    text: 'While the United States raced the Soviet Union to the moon, the Mexican government funneled millions of pesos into research on _.',
+    text: 'While the United States raced the Soviet Union to the moon, the Mexican government funneled millions of pesos into research on ___.',
     pick: 1,
   },
   {
-    text: 'Coming to Broadway this season, _: The Musical.',
+    text: 'Coming to Broadway this season, ___: The Musical.',
     pick: 1,
   },
   {
@@ -184,7 +184,7 @@ const blackCards = [
     pick: 1,
   },
   {
-    text: 'But before I kill you, Mr. Bond, I must show you _.',
+    text: 'But before I kill you, Mr. Bond, I must show you ___.',
     pick: 1,
   },
   {
@@ -200,15 +200,15 @@ const blackCards = [
     pick: 1,
   },
   {
-    text: 'The class field trip was completely ruined by _.',
+    text: 'The class field trip was completely ruined by ___.',
     pick: 1,
   },
   {
-    text: 'When Pharaoh remained unmoved, Moses called down a plague of _.',
+    text: 'When Pharaoh remained unmoved, Moses called down a plague of ___.',
     pick: 1,
   },
   {
-    text: 'I do not know with which weapons World War III will be fought, but World War IV will be fought with _.',
+    text: 'I do not know with which weapons World War III will be fought, but World War IV will be fought with ___.',
     pick: 1,
   },
   {
@@ -216,7 +216,7 @@ const blackCards = [
     pick: 1,
   },
   {
-    text: 'In Michael Jackson\'s final moments, he thought about _.',
+    text: 'In Michael Jackson\'s final moments, he thought about ___.',
     pick: 1,
   },
   {
@@ -224,7 +224,7 @@ const blackCards = [
     pick: 1,
   },
   {
-    text: 'Studies show that lab rats navigate mazes 50% faster after being exposed to _.',
+    text: 'Studies show that lab rats navigate mazes 50% faster after being exposed to ___.',
     pick: 1,
   },
   {
@@ -236,15 +236,15 @@ const blackCards = [
     pick: 1,
   },
   {
-    text: 'And the Academy Award for _ goes to _.',
+    text: 'And the Academy Award for ___ goes to ___.',
     pick: 2,
   },
   {
-    text: 'For my next trick, I will pull _ out of _.',
+    text: 'For my next trick, I will pull ___ out of ___.',
     pick: 2,
   },
   {
-    text: '_: Good to the last drop.',
+    text: '___: Good to the last drop.',
     pick: 1,
   },
   {
@@ -252,7 +252,7 @@ const blackCards = [
     pick: 1,
   },
   {
-    text: '_: kid-tested, mother-approved.',
+    text: '___: kid-tested, mother-approved.',
     pick: 1,
   },
   {
@@ -260,15 +260,15 @@ const blackCards = [
     pick: 1,
   },
   {
-    text: 'I never truly understood _ until I encountered _.',
+    text: 'I never truly understood ___ until I encountered ___.',
     pick: 2,
   },
   {
-    text: 'Rumor has it that Vladimir Putin\'s favorite delicacy is _ stuffed with _.',
+    text: 'Rumor has it that Vladimir Putin\'s favorite delicacy is ___ stuffed with ___.',
     pick: 2,
   },
   {
-    text: 'Lifetime® presents _, the story of _.',
+    text: 'Lifetime® presents ___, the story of ___.',
     pick: 2,
   },
   {
@@ -276,27 +276,27 @@ const blackCards = [
     pick: 3,
   },
   {
-    text: 'In M. Night Shyamalan\'s new movie, Bruce Willis discovers that _ had really been _ all along.',
+    text: 'In M. Night Shyamalan\'s new movie, Bruce Willis discovers that ___ had really been ___ all along.',
     pick: 2,
   },
   {
-    text: '_ is a slippery slope that leads to _.',
+    text: '___ is a slippery slope that leads to ___.',
     pick: 2,
   },
   {
-    text: 'In a world ravaged by _, our only solace is _.',
+    text: 'In a world ravaged by ___, our only solace is ___.',
     pick: 2,
   },
   {
-    text: 'That\'s right, I killed _. How, you ask? _.',
+    text: 'That\'s right, I killed ___. How, you ask? ___.',
     pick: 2,
   },
   {
-    text: 'When I was tripping on acid, _ turned into _.',
+    text: 'When I was tripping on acid, ___ turned into ___.',
     pick: 2,
   },
   {
-    text: '_ + _ = _.',
+    text: '___ + ___ = ___.',
     pick: 3,
   },
   {
@@ -304,35 +304,35 @@ const blackCards = [
     pick: 2,
   },
   {
-    text: 'Dear Abby, I\'m having some trouble with _ and would like your advice.',
+    text: 'Dear Abby, I\'m having some trouble with ___ and would like your advice.',
     pick: 1,
   },
   {
-    text: 'After the earthquake, Sean Penn brought _ to the people of Haiti.',
+    text: 'After the earthquake, Sean Penn brought ___ to the people of Haiti.',
     pick: 1,
   },
   {
-    text: 'In L.A. County Jail, word is you can trade 200 cigarettes for _.',
+    text: 'In L.A. County Jail, word is you can trade 200 cigarettes for ___.',
     pick: 1,
   },
   {
-    text: 'Maybe she\'s born with it. Maybe it\'s _.',
+    text: 'Maybe she\'s born with it. Maybe it\'s ___.',
     pick: 1,
   },
   {
-    text: 'Life for American Indians was forever changed when the White Man introduced them to _.',
+    text: 'Life for American Indians was forever changed when the White Man introduced them to ___.',
     pick: 1,
   },
   {
-    text: 'Next on ESPN2, the World Series of _.',
+    text: 'Next on ESPN2, the World Series of ___.',
     pick: 1,
   },
   {
-    text: 'Step 1: _. Step 2: _. Step 3: Profit.',
+    text: 'Step 1: ___. Step 2: ___. Step 3: Profit.',
     pick: 2,
   },
   {
-    text: 'Here is the church. Here is the steeple. Open the doors. And there is _.',
+    text: 'Here is the church. Here is the steeple. Open the doors. And there is ___.',
     pick: 1,
   },
   {
@@ -340,7 +340,7 @@ const blackCards = [
     pick: 1,
   },
   {
-    text: 'During his childhood, Salvador Dalí produced hundreds of paintings of _.',
+    text: 'During his childhood, Salvador Dalí produced hundreds of paintings of ___.',
     pick: 1,
   },
   {
@@ -352,7 +352,7 @@ const blackCards = [
     pick: 1,
   },
   {
-    text: 'The Smithsonian Museum of Natural History has just opened an exhibit on _.',
+    text: 'The Smithsonian Museum of Natural History has just opened an exhibit on ___.',
     pick: 1,
   },
   {
