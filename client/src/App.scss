@@ -6,7 +6,7 @@
   padding: 40px;
 }
 
-.cah-card {
+.uocg-card {
   position: relative;
   box-shadow: 3px 2px 10px 3px rgba(0, 0, 0, 0.05);
   border-radius: 5px;
@@ -14,9 +14,9 @@
   padding: 1.5rem;
   height: 20rem;
 
-  &--black {
+  &--question {
     color: $white;
-    background: $black;
+    background: $cyan;
   }
   &--answer {
     cursor: pointer;
@@ -34,7 +34,7 @@
   }
 
   &:hover {
-    .cah-card__footer--dynamic {
+    .uocg-card__footer--dynamic {
       display: block;
     }
   }

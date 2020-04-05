@@ -7,14 +7,14 @@ export default class WhiteCard extends React.Component<IPropsType> {
 
   render() {
     return (
-      <div className="cah-card is-size-4 has-text-weight-bold has-text-black">
+      <div className="uocg-card is-size-4 has-text-weight-bold">
         {this.props.card}
 
-        <div className="cah-card__footer cah-card__footer--dynamic">
-          <div className="button is-black has-text-weight-normal is-fullwidth" onClick={this.handlePlayCardClick}>Play</div>
+        <div className="uocg-card__footer uocg-card__footer--dynamic">
+          <div className="button is-info has-text-weight-normal is-fullwidth" onClick={this.handlePlayCardClick}>Play</div>
         </div>
       </div>
-    )
+    );
   }
 }
 

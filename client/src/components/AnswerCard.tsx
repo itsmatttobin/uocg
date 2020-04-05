@@ -9,11 +9,11 @@ export default class AnswerCard extends React.Component<IPropsType> {
   render() {
     return (
       <div
-        className="cah-card cah-card--answer is-size-4 has-text-weight-bold has-text-black"
+        className="uocg-card uocg-card--answer is-size-4 has-text-weight-bold"
         onClick={this.handleCardClick}
       >
         {this.props.card.revealed && this.props.card.text}
-        {!this.props.card.revealed && <span>Cards Against Humanity</span>}
+        {!this.props.card.revealed && <span className="is-size-3">Untitled Offensive Card Game</span>}
       </div>
     );
   }
