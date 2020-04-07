@@ -121,8 +121,11 @@ io.on('connection', socket => {
       player.wonCards.push(currentCard);
     }
 
-    updateRoom(id);
+    rooms[id].currentCard = null;
+    rooms[id].answerCards = [];
+
     io.to(id).emit('END_OF_ROUND', player, currentCard, card);
+    updateRoom(id);
   });
 
   socket.on('RESTART_GAME', id => {
