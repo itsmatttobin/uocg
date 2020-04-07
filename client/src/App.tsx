@@ -17,7 +17,7 @@ import RoundModal from './components/RoundModal';
 
 export default class App extends React.Component<{}, IStateType> {
   state: IStateType = {
-    host: 'http://localhost:4000',
+    host: process.env.REACT_APP_SERVER_HOST || '',
     roomId: '',
     name: '',
     room: {
