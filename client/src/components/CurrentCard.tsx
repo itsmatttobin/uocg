@@ -2,6 +2,7 @@ import React from 'react';
 import IRoom from '../definitions/room';
 import BlackCard from './BlackCard';
 import EVENTS from '../definitions/events';
+import StartRound from './StartRound';
 
 export default class CurrentCard extends React.Component<IPropsType> {
   handleDrawBlackCardClick = () => {
@@ -10,7 +11,7 @@ export default class CurrentCard extends React.Component<IPropsType> {
     }
   }
 
-  renderCurrentCard = () => this.props.room.currentCard && <BlackCard card={this.props.room.currentCard} />;
+  renderCurrentCard = () => this.props.room.currentCard ? <BlackCard card={this.props.room.currentCard} /> : <StartRound />;
 
   render() {
     return (

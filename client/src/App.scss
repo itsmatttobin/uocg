@@ -30,6 +30,11 @@
   &--answer {
     cursor: pointer;
   }
+  &--empty {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
 
   &__footer {
     position: absolute;
