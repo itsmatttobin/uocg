@@ -1,5 +1,5 @@
 # Build
-FROM node:12 as build-deps
+FROM node:lts-alpine as build-deps
 WORKDIR /usr/src/app
 COPY package.json ./
 COPY yarn.lock ./
