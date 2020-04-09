@@ -27,7 +27,7 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "lint": "tslint -c tslint.json -p .",
-    "build:docker": "docker build -t itsmatttobin/uocg-client .",
+    "build:docker": "docker build -t itsmatttobin/uocg-client . && docker push itsmatttobin/uocg-client",
     "start:docker": "docker run -p 3000:80 -d itsmatttobin/uocg-client"
   },
   "eslintConfig": {
