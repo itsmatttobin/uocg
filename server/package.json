@@ -4,7 +4,9 @@
   "private": true,
   "scripts": {
     "start": "node app.js",
-    "start:watch": "nodemon app.js"
+    "start:watch": "nodemon app.js",
+    "build:docker": "docker build -t itsmatttobin/uocg-server .",
+    "start:docker": "docker run -p 4000:4000 -d itsmatttobin/uocg-server"
   },
   "dependencies": {
     "cors": "^2.8.5",
