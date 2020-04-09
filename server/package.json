@@ -1,11 +1,11 @@
 {
   "name": "uocg-server",
-  "version": "0.6.2",
+  "version": "0.6.3",
   "private": true,
   "scripts": {
     "start": "node app.js",
     "start:watch": "nodemon app.js",
-    "build:docker": "docker build -t itsmatttobin/uocg-server .",
+    "build:docker": "docker build -t itsmatttobin/uocg-server . && docker push itsmatttobin/uocg-server",
     "start:docker": "docker run -p 4000:4000 -d itsmatttobin/uocg-server"
   },
   "dependencies": {

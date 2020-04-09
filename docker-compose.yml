@@ -1,0 +1,10 @@
+version: '3'
+services:
+  server:
+    image: itsmatttobin/uocg-server
+    ports:
+      - "4000:4000"
+  client:
+    image: itsmatttobin/uocg-client
+    ports:
+      - "3000:80"
