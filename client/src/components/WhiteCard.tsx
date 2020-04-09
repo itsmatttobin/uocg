@@ -10,9 +10,11 @@ export default class WhiteCard extends React.Component<IPropsType> {
       <div className="uocg-card is-size-4 has-text-weight-bold">
         {this.props.card}
 
-        <div className="uocg-card__footer uocg-card__footer--dynamic">
-          <div className="button is-info has-text-weight-normal is-fullwidth" onClick={this.handlePlayCardClick}>Play</div>
-        </div>
+        {this.props.isPlayable && (
+          <div className="uocg-card__footer uocg-card__footer--dynamic">
+            <div className="button is-info has-text-weight-normal is-fullwidth" onClick={this.handlePlayCardClick}>Play</div>
+          </div>
+        )}
       </div>
     );
   }
@@ -20,5 +22,6 @@ export default class WhiteCard extends React.Component<IPropsType> {
 
 interface IPropsType {
   card: string;
+  isPlayable: boolean;
   onPlayCard: (card: string) => void;
 }

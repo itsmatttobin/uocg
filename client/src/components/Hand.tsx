@@ -22,16 +22,20 @@ export default class Hand extends React.Component<IPropsType, IStateType> {
   }
 
   handlePlayCard = (card: string) => {
-    const hand = [...this.state.whiteCards];
-    const index = hand.indexOf(card);
-    hand.splice(index, 1);
+    if (this.props.room.currentCard) {
+      const hand = [...this.state.whiteCards];
+      const index = hand.indexOf(card);
+      hand.splice(index, 1);
 
-    this.setState({ whiteCards: hand }, () => {
-      this.props.socket.emit(EVENTS.PLAY_CARD, this.props.roomId, card);
-    });
+      this.setState({ whiteCards: hand }, () => {
+        this.props.socket.emit(EVENTS.PLAY_CARD, this.props.roomId, card);
+      });
+    }
   }
 
   isDrawCardDisabled = () => this.state.whiteCards.length === 10;
+
+  hasQuestionCard = () => !!this.props.room.currentCard;
 
   render() {
     return (
@@ -45,7 +49,7 @@ export default class Hand extends React.Component<IPropsType, IStateType> {
         <div className="columns is-multiline">
           {this.state.whiteCards.map((card, index) => (
             <div key={index} className="column is-one-fifth">
-              <WhiteCard card={card} onPlayCard={this.handlePlayCard} />
+              <WhiteCard card={card} isPlayable={this.hasQuestionCard()} onPlayCard={this.handlePlayCard} />
             </div>
           ))}
         </div>
