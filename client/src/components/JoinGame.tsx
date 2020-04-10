@@ -38,30 +38,41 @@ export default class JoinGame extends React.Component<IPropsType, IStateType> {
   render() {
     return (
       <div className="columns">
-        <div className="column is-one-quarter">
+        <div className="column is-3">
           <div className="title is-4">Player</div>
           <div className="field">
-            <label className="label">Player name:</label>
-            <input type="text" className="input" value={this.state.name} onChange={this.handleNameChange} />
+            <input type="text" className="input" placeholder="Enter your name" value={this.state.name} onChange={this.handleNameChange} />
           </div>
+        </div>
 
-          <hr/>
+        <div className="column is-1" />
 
+        <div className="column is-3">
           <div className="title is-4">Start new room</div>
           <div className="field">
-            <button className="button is-info" onClick={this.handleStartClick} disabled={!this.isStartEnabled()}>Start new room</button>
+            <button className="button is-info is-fullwidth" onClick={this.handleStartClick} disabled={!this.isStartEnabled()}>
+              Start new room
+            </button>
           </div>
+        </div>
 
-          <hr/>
+        <div className="column is-1" />
 
+        <div className="column is-3">
           <h3 className="title is-4">Join existing room</h3>
-          <div className="field">
-            <label className="label">Room ID:</label>
-            <input type="text" className="input" value={this.state.roomId} onChange={this.handleRoomIdChange} />
-          </div>
-
-          <div className="field">
-            <button className="button is-info" onClick={this.handleJoinClick} disabled={!this.isJoinEnabled()}>Join</button>
+          <div className="columns">
+            <div className="column">
+              <div className="field">
+                <input type="text" className="input" placeholder="Room ID" value={this.state.roomId} onChange={this.handleRoomIdChange} />
+              </div>
+            </div>
+            <div className="column is-4">
+              <div className="field">
+                <button className="button is-info is-fullwidth" onClick={this.handleJoinClick} disabled={!this.isJoinEnabled()}>
+                  Join
+                </button>
+              </div>
+            </div>
           </div>
 
           {this.state.joinRoomError && <p className="has-text-danger">Error: Room does not exist</p>}

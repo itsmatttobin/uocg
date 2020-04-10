@@ -11,7 +11,7 @@
 }
 
 .main {
-  min-height: calc(100vh - 267px);
+  min-height: calc(100vh - 272px);
 }
 
 .title--answer-area {
@@ -91,4 +91,14 @@
     align-items: flex-end;
     justify-content: flex-end;
   }
+}
+
+::-webkit-input-placeholder {
+  color: $grey-light !important;
+}
+:-ms-input-placeholder {
+  color: $grey-light !important;
+}
+::placeholder {
+  color: $grey-light !important;
 }
