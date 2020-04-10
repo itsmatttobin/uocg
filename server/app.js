@@ -28,6 +28,7 @@ function addPlayerToRoom(socket, name, roomId) {
   const player = {
     id: socket.id,
     name,
+    hand: [],
     wonCards: [],
   };
 
@@ -92,9 +93,13 @@ io.on('connection', socket => {
     }
   });
 
-  socket.on('DRAW_WHITE_CARD', id => {
-    rooms[id].whiteCards.shift();
-    updateRoom(id);
+  socket.on('DRAW_WHITE_CARD', (roomId, playerId) => {
+    const player = rooms[roomId] && rooms[roomId].players.find(player => player.id === playerId);
+    // Remove card from deck
+    const card = rooms[roomId].whiteCards.shift();
+    // Add to player hand
+    player.hand.push(card);    
+    updateRoom(roomId);
   });
 
   socket.on('DRAW_BLACK_CARD', id => {
@@ -104,9 +109,15 @@ io.on('connection', socket => {
     updateRoom(id);
   });
 
-  socket.on('PLAY_CARD', (id, card) => {
-    rooms[id].answerCards.push({ text: card, revealed: false, playerId: socket.id });
-    updateRoom(id);
+  socket.on('PLAY_CARD', (roomId, card, playerId) => {
+    // Remove card from player hand
+    const player = rooms[roomId] && rooms[roomId].players.find(player => player.id === playerId);
+    const index = player.hand.indexOf(card);
+    player.hand.splice(index, 1);
+
+    // Add card to played answer cards
+    rooms[roomId].answerCards.push({ text: card, revealed: false, playerId });
+    updateRoom(roomId);
   });
 
   socket.on('REVEAL_CARD', (id, cardToReveal) => {

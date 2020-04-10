@@ -3,37 +3,20 @@ import IRoom from '../definitions/room';
 import WhiteCard from './WhiteCard';
 import EVENTS from '../definitions/events';
 
-export default class Hand extends React.Component<IPropsType, IStateType> {
-  state: IStateType = {
-    whiteCards: [],
-  };
-
-  componentDidMount = () => {
-    this.props.socket.on(EVENTS.GAME_RESTARTED, () => {
-      this.setState({ whiteCards: [] });
-    });
-  }
-
+export default class Hand extends React.Component<IPropsType> {
   handleDrawCardClick = () => {
-    if (this.state.whiteCards.length < 10) {
-      this.setState({ whiteCards: [...this.state.whiteCards, this.props.room.whiteCards[0]] });
-      this.props.socket.emit(EVENTS.DRAW_WHITE_CARD, this.props.roomId);
+    if (this.props.hand.length < 10) {
+      this.props.socket.emit(EVENTS.DRAW_WHITE_CARD, this.props.roomId, this.props.socket.id);
     }
   }
 
   handlePlayCard = (card: string) => {
     if (this.props.room.currentCard) {
-      const hand = [...this.state.whiteCards];
-      const index = hand.indexOf(card);
-      hand.splice(index, 1);
-
-      this.setState({ whiteCards: hand }, () => {
-        this.props.socket.emit(EVENTS.PLAY_CARD, this.props.roomId, card);
-      });
+      this.props.socket.emit(EVENTS.PLAY_CARD, this.props.roomId, card, this.props.socket.id);
     }
   }
 
-  isDrawCardDisabled = () => this.state.whiteCards.length === 10;
+  isDrawCardDisabled = () => this.props.hand.length === 10;
 
   hasQuestionCard = () => !!this.props.room.currentCard;
 
@@ -47,7 +30,7 @@ export default class Hand extends React.Component<IPropsType, IStateType> {
         </div>
 
         <div className="columns is-multiline">
-          {this.state.whiteCards.map((card, index) => (
+          {this.props.hand.map((card, index) => (
             <div key={index} className="column is-one-fifth">
               <WhiteCard card={card} isPlayable={this.hasQuestionCard()} onPlayCard={this.handlePlayCard} />
             </div>
@@ -62,8 +45,5 @@ interface IPropsType {
   socket: SocketIOClient.Socket;
   roomId: string;
   room: IRoom;
-}
-
-interface IStateType {
-  whiteCards: string[];
+  hand: string[];
 }
