@@ -25,8 +25,12 @@ export default class Hand extends React.Component<IPropsType> {
       <div>
         <h3 className="title is-4">Your hand</h3>
 
-        <div className="button-section">
-          <button className="button" onClick={this.handleDrawCardClick} disabled={this.isDrawCardDisabled()}>Draw answer card</button>
+        <div className="columns">
+          <div className="column is-one-fifth">
+            <button className="button is-fullwidth" onClick={this.handleDrawCardClick} disabled={this.isDrawCardDisabled()}>
+              Draw answer card
+            </button>
+          </div>
         </div>
 
         <div className="columns is-multiline">
