@@ -55,6 +55,18 @@ function shuffleCards(cards) {
   return cards;
 }
 
+function getRandomId() {
+  const length = 6;
+  const characters = 'abcdefghijklmnopqrstuvwxyz123456789';
+  let result = '';
+
+  for (let i = 0; i < length; i++) {
+     result += characters.charAt(Math.floor(Math.random() * characters.length));
+  }
+
+  return result;
+}
+
 io.on('connection', socket => {
   // Allow a client to be in one room at a time
   let previousId;
@@ -65,13 +77,25 @@ io.on('connection', socket => {
   };
 
   socket.on('JOIN_ROOM', (id, name) => {
+    if (!rooms[id]) {
+      socket.emit('NO_ROOM_EXISTS');
+      return;
+    }
+
     safeJoin(id);
+    addPlayerToRoom(socket, name, id);
+    updateRoom(id);
+  });
+
+  socket.on('START_ROOM', name => {
+    const id = getRandomId();
 
     // Create a new room if one doesn't already exist
     if (!rooms[id]) {
       initRoom(id);
     }
 
+    safeJoin(id);
     addPlayerToRoom(socket, name, id);
     updateRoom(id);
   });
@@ -146,6 +170,7 @@ io.on('connection', socket => {
     rooms[id].answerCards = [];
     rooms[id].players = rooms[id].players.map(player => ({
       ...player,
+      hand: [],
       wonCards: [],
     }));
 

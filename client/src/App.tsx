@@ -55,7 +55,7 @@ export default class App extends React.Component<{}, IStateType> {
     window.addEventListener('unload', () => {
       if (this.hasPlayerJoinedRoom()) {
         // TODO: Add white cards back to the deck
-        this.socket.emit(EVENTS.LEAVE_ROOM, this.state.socketId, this.state.roomId);
+        this.socket.emit(EVENTS.LEAVE_ROOM, this.state.socketId, this.state.room.id);
       }
     });
 
@@ -73,9 +73,20 @@ export default class App extends React.Component<{}, IStateType> {
 
     // Analytics
     if (process.env.NODE_ENV === 'production') {
-      ReactGA.initialize('UA-163358094-1');
+      const trackingCode = process.env.REACT_APP_GA_TRACKING_CODE || '';
+      ReactGA.initialize(trackingCode);
       ReactGA.pageview('/home');
     }
+  }
+
+  handleStartRoom = (name: string) => {
+    this.setState({ name }, () => {
+      this.socket.emit(EVENTS.START_ROOM, this.state.name);
+
+      if (process.env.NODE_ENV === 'production') {
+        ReactGA.pageview('/inRoom');
+      }
+    });
   }
 
   handleJoinRoom = (roomId: string, name: string) => {
@@ -102,7 +113,7 @@ export default class App extends React.Component<{}, IStateType> {
   }
 
   handleRestartGame = () => {
-    this.socket.emit(EVENTS.RESTART_GAME, this.state.roomId);
+    this.socket.emit(EVENTS.RESTART_GAME, this.state.room.id);
   }
 
   render() {
@@ -111,12 +122,14 @@ export default class App extends React.Component<{}, IStateType> {
         <Header/>
 
         <div className="main">
-          {!this.hasPlayerJoinedRoom() && <JoinGame onJoinRoom={this.handleJoinRoom} />}
+          {!this.hasPlayerJoinedRoom() && (
+            <JoinGame onStartRoom={this.handleStartRoom} onJoinRoom={this.handleJoinRoom} socket={this.socket} />
+          )}
 
           {this.hasPlayerJoinedRoom() && (
             <div className="columns">
               <div className="column">
-                <GameArea socket={this.socket} roomId={this.state.roomId} room={this.state.room} />
+                <GameArea socket={this.socket} roomId={this.state.room.id} room={this.state.room} />
               </div>
               <div className="column is-2">
                 <PlayerList players={this.state.room.players} onRestartGame={this.handleRestartGame} />
