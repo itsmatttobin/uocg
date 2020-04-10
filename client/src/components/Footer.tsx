@@ -8,7 +8,8 @@ const Footer = () => (
         <div className="version">
           <div>
             v{packageJson.version}<br/>
-            <a href="https://github.com/itsmatttobin/uocg">itsmatttobin/uocg</a>
+            <a href="https://github.com/itsmatttobin/uocg">itsmatttobin/uocg</a><br/>
+            Found a bug? Report it <a href="https://github.com/itsmatttobin/uocg/issues">here</a>.
           </div>
         </div>
       </div>
