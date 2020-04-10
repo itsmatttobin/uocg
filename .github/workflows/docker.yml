@@ -2,6 +2,8 @@ name: Docker
 
 on:
   push:
+    branches:
+      - master
     tags:
       - v*
 
@@ -30,13 +32,14 @@ jobs:
           # Strip "v" prefix from tag name
           [[ "${{ github.ref }}" == "refs/tags/"* ]] && VERSION=$(echo $VERSION | sed -e 's/^v//')
 
+          # Use Docker `latest` tag convention
+          [ "$VERSION" == "master" ] && VERSION=latest
+
+          echo SERVER_IMAGE_NAME=$SERVER_IMAGE_NAME
           echo VERSION=$VERSION
 
           docker tag $SERVER_IMAGE_NAME $SERVER_IMAGE_NAME:$VERSION
           docker push $SERVER_IMAGE_NAME:$VERSION
-          
-          docker tag $SERVER_IMAGE_NAME $SERVER_IMAGE_NAME:latest
-          docker push $SERVER_IMAGE_NAME:latest
         working-directory: ./server
 
   push-client:
@@ -59,11 +62,12 @@ jobs:
           # Strip "v" prefix from tag name
           [[ "${{ github.ref }}" == "refs/tags/"* ]] && VERSION=$(echo $VERSION | sed -e 's/^v//')
 
+          # Use Docker `latest` tag convention
+          [ "$VERSION" == "master" ] && VERSION=latest
+
+          echo CLIENT_IMAGE_NAME=$CLIENT_IMAGE_NAME
           echo VERSION=$VERSION
 
           docker tag $CLIENT_IMAGE_NAME $CLIENT_IMAGE_NAME:$VERSION
           docker push $CLIENT_IMAGE_NAME:$VERSION
-          
-          docker tag $CLIENT_IMAGE_NAME $CLIENT_IMAGE_NAME:latest
-          docker push $CLIENT_IMAGE_NAME:latest
         working-directory: ./client
