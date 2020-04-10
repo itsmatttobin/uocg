@@ -5,6 +5,12 @@ import CurrentCard from './CurrentCard';
 import AnswerCardArea from './AnswerCardArea';
 
 export default class GameArea extends React.Component<IPropsType> {
+  getCurrentPlayerHand = () => {
+    const currentPlayer = this.props.room.players.find(player => player.id === this.props.socket.id);
+    const hand =  currentPlayer ? currentPlayer.hand : [];
+    return hand;
+  }
+
   render() {
     return (
       <div>
@@ -24,7 +30,7 @@ export default class GameArea extends React.Component<IPropsType> {
 
         <hr/>
 
-        <Hand socket={this.props.socket} roomId={this.props.roomId} room={this.props.room} />
+        <Hand socket={this.props.socket} roomId={this.props.roomId} room={this.props.room} hand={this.getCurrentPlayerHand()} />
       </div>
     );
   }
