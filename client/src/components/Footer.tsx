@@ -6,7 +6,10 @@ const Footer = () => (
     <div className="columns">
       <div className="column">
         <div className="version">
-          v{packageJson.version}
+          <div>
+            v{packageJson.version}<br/>
+            <a href="https://github.com/itsmatttobin/uocg">itsmatttobin/uocg</a>
+          </div>
         </div>
       </div>
       <div className="column">
