@@ -8,14 +8,14 @@ const whiteCards = require('./data/white-cards');
 
 const rooms = {};
 
-function updateRoom(id) {
+function updateRoom(roomId) {
   // Emit room data to all clients in a room
-  io.to(id).emit('UPDATE_ROOM', rooms[id]);
+  io.to(roomId).emit('UPDATE_ROOM', rooms[roomId]);
 }
 
-function initRoom(id) {
-  rooms[id] = {
-    id,
+function initRoom(roomId) {
+  rooms[roomId] = {
+    id: roomId,
     blackCards: shuffleCards(JSON.parse(JSON.stringify(blackCards))),
     whiteCards: shuffleCards(JSON.parse(JSON.stringify(whiteCards))),
     players: [],
@@ -32,7 +32,9 @@ function addPlayerToRoom(socket, name, roomId) {
     wonCards: [],
   };
 
-  rooms[roomId].players.push(player);
+  if (rooms[roomId]) {
+    rooms[roomId].players.push(player);
+  }  
 }
 
 function shuffleCards(cards) {
@@ -76,34 +78,34 @@ io.on('connection', socket => {
     previousId = currentId;
   };
 
-  socket.on('JOIN_ROOM', (id, name) => {
-    if (!rooms[id]) {
+  socket.on('JOIN_ROOM', (roomId, name) => {
+    if (!rooms[roomId]) {
       socket.emit('NO_ROOM_EXISTS');
       return;
     }
 
-    safeJoin(id);
-    addPlayerToRoom(socket, name, id);
-    updateRoom(id);
+    safeJoin(roomId);
+    addPlayerToRoom(socket, name, roomId);
+    updateRoom(roomId);
   });
 
   socket.on('START_ROOM', name => {
-    const id = getRandomId();
+    const roomId = getRandomId();
 
     // Create a new room if one doesn't already exist
-    if (!rooms[id]) {
-      initRoom(id);
+    if (!rooms[roomId]) {
+      initRoom(roomId);
     }
 
-    safeJoin(id);
-    addPlayerToRoom(socket, name, id);
-    updateRoom(id);
+    safeJoin(roomId);
+    addPlayerToRoom(socket, name, roomId);
+    updateRoom(roomId);
   });
 
   socket.on('LEAVE_ROOM', (playerId, roomId) => {
     const player = rooms[roomId] && rooms[roomId].players.find(player => player.id === playerId);
 
-    if (player) {
+    if (player && rooms[roomId]) {
       const index = rooms[roomId].players.indexOf(player);
       rooms[roomId].players.splice(index, 1);
     }
@@ -119,63 +121,86 @@ io.on('connection', socket => {
 
   socket.on('DRAW_WHITE_CARD', (roomId, playerId) => {
     const player = rooms[roomId] && rooms[roomId].players.find(player => player.id === playerId);
+    
     // Remove card from deck
-    const card = rooms[roomId].whiteCards.shift();
+    const card = rooms[roomId] && rooms[roomId].whiteCards.shift();
+    
     // Add to player hand
-    player.hand.push(card);    
+    if (player) {
+      player.hand.push(card);    
+    }
+
     updateRoom(roomId);
   });
 
-  socket.on('DRAW_BLACK_CARD', id => {
-    rooms[id].currentCard = rooms[id].blackCards[0];
-    rooms[id].blackCards.shift();
-    rooms[id].answerCards = [];
-    updateRoom(id);
+  socket.on('DRAW_BLACK_CARD', roomId => {
+    if (rooms[roomId]) {
+      rooms[roomId].currentCard = rooms[roomId].blackCards[0];
+      rooms[roomId].blackCards.shift();
+      rooms[roomId].answerCards = [];
+    }
+
+    updateRoom(roomId);
   });
 
   socket.on('PLAY_CARD', (roomId, card, playerId) => {
     // Remove card from player hand
     const player = rooms[roomId] && rooms[roomId].players.find(player => player.id === playerId);
-    const index = player.hand.indexOf(card);
-    player.hand.splice(index, 1);
+    const index = player && player.hand.indexOf(card);
+
+    if (player) {
+      player.hand.splice(index, 1);
+    }    
 
     // Add card to played answer cards
-    rooms[roomId].answerCards.push({ text: card, revealed: false, playerId });
+    if (rooms[roomId]) {
+      rooms[roomId].answerCards.push({ text: card, revealed: false, playerId });
+    }
+
     updateRoom(roomId);
   });
 
-  socket.on('REVEAL_CARD', (id, cardToReveal) => {
-    const foundCard = rooms[id].answerCards.find(card => card.text === cardToReveal.text);
-    foundCard.revealed = !foundCard.revealed;
-    updateRoom(id);
+  socket.on('REVEAL_CARD', (roomId, cardToReveal) => {
+    const foundCard = rooms[roomId] && rooms[roomId].answerCards.find(card => card.text === cardToReveal.text);
+
+    if (foundCard) {
+      foundCard.revealed = !foundCard.revealed;
+    }
+
+    updateRoom(roomId);
   });
 
-  socket.on('CHOOSE_WINNING_CARD', (id, card, currentCard) => {
-    const player = rooms[id].players.find(player => player.id === card.playerId);
+  socket.on('CHOOSE_WINNING_CARD', (roomId, card, currentCard) => {
+    const player = rooms[roomId] && rooms[roomId].players.find(player => player.id === card.playerId);
+
     if (player) {
       player.wonCards.push(currentCard);
     }
 
-    rooms[id].currentCard = null;
-    rooms[id].answerCards = [];
+    if (rooms[roomId]) {
+      rooms[roomId].currentCard = null;
+      rooms[roomId].answerCards = [];
+    }
 
-    io.to(id).emit('END_OF_ROUND', player, currentCard, card);
-    updateRoom(id);
+    io.to(roomId).emit('END_OF_ROUND', player, currentCard, card);
+    updateRoom(roomId);
   });
 
-  socket.on('RESTART_GAME', id => {
-    rooms[id].whiteCards = shuffleCards(JSON.parse(JSON.stringify(whiteCards)));
-    rooms[id].blackCards = shuffleCards(JSON.parse(JSON.stringify(blackCards)));
-    rooms[id].currentCard = null;
-    rooms[id].answerCards = [];
-    rooms[id].players = rooms[id].players.map(player => ({
-      ...player,
-      hand: [],
-      wonCards: [],
-    }));
+  socket.on('RESTART_GAME', roomId => {
+    if (rooms[roomId]) {
+      rooms[roomId].whiteCards = shuffleCards(JSON.parse(JSON.stringify(whiteCards)));
+      rooms[roomId].blackCards = shuffleCards(JSON.parse(JSON.stringify(blackCards)));
+      rooms[roomId].currentCard = null;
+      rooms[roomId].answerCards = [];
+      rooms[roomId].players = rooms[roomId].players.map(player => ({
+        ...player,
+        hand: [],
+        wonCards: [],
+      }));
+    }
 
-    io.to(id).emit('GAME_RESTARTED');
-    updateRoom(id);
+    io.to(roomId).emit('GAME_RESTARTED');
+    updateRoom(roomId);
   });
 });
 
