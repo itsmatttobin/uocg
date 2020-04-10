@@ -73,7 +73,7 @@ export default class App extends React.Component<{}, IStateType> {
 
     // Analytics
     if (process.env.NODE_ENV === 'production') {
-      ReactGA.initialize('UA-163358094-1', {debug: true});
+      ReactGA.initialize('UA-163358094-1');
       ReactGA.pageview('/home');
     }
   }
