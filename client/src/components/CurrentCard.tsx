@@ -22,6 +22,9 @@ export default class CurrentCard extends React.Component<IPropsType> {
 
         <div>
           {this.renderCurrentCard()}
+          <div className="has-text-centered has-text-grey-light is-size-7 cards-remaining">
+            Cards left: {this.props.room.blackCards.length}
+          </div>
         </div>
       </div>
     );
