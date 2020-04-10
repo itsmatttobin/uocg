@@ -1,0 +1,69 @@
+name: Docker
+
+on:
+  push:
+    tags:
+      - v*
+
+env:
+  SERVER_IMAGE_NAME: itsmatttobin/uocg-server
+  CLIENT_IMAGE_NAME: itsmatttobin/uocg-client
+
+jobs:
+  push-server:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Log into Docker hub
+        run: echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u ${{ secrets.DOCKER_USER }} --password-stdin
+
+      - name: Build image
+        run: docker build -t $SERVER_IMAGE_NAME .
+        working-directory: ./server
+
+      - name: Push image
+        run: |
+          # Strip git ref prefix from version
+          VERSION=$(echo "${{ github.ref }}" | sed -e 's,.*/\(.*\),\1,')
+
+          # Strip "v" prefix from tag name
+          [[ "${{ github.ref }}" == "refs/tags/"* ]] && VERSION=$(echo $VERSION | sed -e 's/^v//')
+
+          echo VERSION=$VERSION
+
+          docker tag $SERVER_IMAGE_NAME $SERVER_IMAGE_NAME:$VERSION
+          docker push $SERVER_IMAGE_NAME:$VERSION
+          
+          docker tag $SERVER_IMAGE_NAME $SERVER_IMAGE_NAME:latest
+          docker push $SERVER_IMAGE_NAME:latest
+        working-directory: ./server
+
+  push-client:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Log into Docker hub
+        run: echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u ${{ secrets.DOCKER_USER }} --password-stdin
+
+      - name: Build image
+        run: docker build -t $CLIENT_IMAGE_NAME .
+        working-directory: ./client
+
+      - name: Push image
+        run: |
+          # Strip git ref prefix from version
+          VERSION=$(echo "${{ github.ref }}" | sed -e 's,.*/\(.*\),\1,')
+
+          # Strip "v" prefix from tag name
+          [[ "${{ github.ref }}" == "refs/tags/"* ]] && VERSION=$(echo $VERSION | sed -e 's/^v//')
+
+          echo VERSION=$VERSION
+
+          docker tag $CLIENT_IMAGE_NAME $CLIENT_IMAGE_NAME:$VERSION
+          docker push $CLIENT_IMAGE_NAME:$VERSION
+          
+          docker tag $CLIENT_IMAGE_NAME $CLIENT_IMAGE_NAME:latest
+          docker push $CLIENT_IMAGE_NAME:latest
+        working-directory: ./client
