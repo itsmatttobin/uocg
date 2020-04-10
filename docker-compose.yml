@@ -2,9 +2,11 @@ version: '3'
 services:
   server:
     image: itsmatttobin/uocg-server
+    restart: always
     ports:
       - "4000:4000"
   client:
     image: itsmatttobin/uocg-client
+    restart: always
     ports:
       - "3000:80"
