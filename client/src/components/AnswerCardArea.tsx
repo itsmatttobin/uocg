@@ -16,7 +16,7 @@ export default class AnswerCardArea extends React.Component<IPropsType> {
   render() {
     return (
       <div>
-        <h3 className="title is-4">Answer cards</h3>
+        <h3 className="title title--answer-area is-4">Answer cards</h3>
 
         <div className="columns is-multiline">
           {this.props.room.answerCards.map((card, index) => (
