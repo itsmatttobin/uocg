@@ -14,6 +14,7 @@ import IAnswerCard from './definitions/answer-card';
 import IBlackCard from './definitions/black-card';
 import IRoundModal from './definitions/round-modal';
 import RoundModal from './components/RoundModal';
+import ReactGA from 'react-ga';
 
 export default class App extends React.Component<{}, IStateType> {
   state: IStateType = {
@@ -69,11 +70,21 @@ export default class App extends React.Component<{}, IStateType> {
         },
       });
     });
+
+    // Analytics
+    if (process.env.NODE_ENV === 'production') {
+      ReactGA.initialize('UA-163358094-1');
+      ReactGA.pageview('/home');
+    }
   }
 
   handleJoinRoom = (roomId: string, name: string) => {
     this.setState({ roomId, name }, () => {
       this.socket.emit(EVENTS.JOIN_ROOM, this.state.roomId, this.state.name);
+
+      if (process.env.NODE_ENV === 'production') {
+        ReactGA.pageview('/inRoom');
+      }
     });
   }
 
