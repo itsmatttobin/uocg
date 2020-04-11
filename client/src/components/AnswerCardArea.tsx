@@ -14,7 +14,6 @@ export default class AnswerCardArea extends React.Component<IPropsType> {
   }
 
   render() {
-    console.log('test');
     return (
       <div>
         <h3 className="title title--answer-area is-4">Answer cards</h3>
