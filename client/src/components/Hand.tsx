@@ -20,6 +20,11 @@ export default class Hand extends React.Component<IPropsType> {
 
   hasQuestionCard = () => !!this.props.room.currentCard;
 
+  playerHasPlayedCards = () => {
+    const playedCards = this.props.room.answerCards.filter(card => card.playerId === this.props.socket.id);
+    return playedCards.length >= Number(this.props.room.currentCard?.pick);
+  }
+
   render() {
     return (
       <div>
@@ -36,7 +41,7 @@ export default class Hand extends React.Component<IPropsType> {
         <div className="columns is-multiline">
           {this.props.hand.map((card, index) => (
             <div key={index} className="column is-one-fifth">
-              <WhiteCard card={card} isPlayable={this.hasQuestionCard()} onPlayCard={this.handlePlayCard} />
+              <WhiteCard card={card} isPlayable={this.hasQuestionCard() && !this.playerHasPlayedCards()} onPlayCard={this.handlePlayCard} />
             </div>
           ))}
         </div>
