@@ -14,13 +14,14 @@ export default class AnswerCardArea extends React.Component<IPropsType> {
   }
 
   render() {
+    console.log('test');
     return (
       <div>
         <h3 className="title title--answer-area is-4">Answer cards</h3>
 
         <div className="columns is-multiline">
           {this.props.room.answerCards.map((card, index) => (
-            <div  key={index} className="column is-one-quarter">
+            <div  key={index} className="column is-5-tablet is-3-desktop">
               <AnswerCard card={card} onCardClick={this.handleCardClick} onChooseCardClick={this.handleChooseCardClick} />
             </div>
           ))}

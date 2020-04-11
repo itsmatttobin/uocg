@@ -41,7 +41,7 @@ export default class PlayerList extends React.Component<IPropsType, IStateType> 
             <h6 className="title is-6">Name</h6>
           </div>
           <div className="column is-4 has-text-centered">
-            <h6 className="title is-6">Score</h6>
+            <h6 className="title is-6 player-score">Score</h6>
           </div>
         </div>
 
