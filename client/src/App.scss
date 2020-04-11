@@ -29,12 +29,25 @@
   word-break: break-word;
   overflow: hidden;
 
+  @media (max-width: 768px) {
+    height: auto;
+  }
+
+  &--in-hand {
+    @media (max-width: 768px) {
+      padding-bottom: 86px;
+    }
+  }
   &--question {
     color: $white;
     background: $cyan;
   }
   &--answer {
     cursor: pointer;
+
+    @media (max-width: 768px) {
+      padding-bottom: 86px;
+    }
   }
   &--empty {
     display: flex;
@@ -50,6 +63,10 @@
 
     &--dynamic {
       display: none;
+
+      @media (max-width: 768px) {
+        display: block;
+      }
     }
   }
 

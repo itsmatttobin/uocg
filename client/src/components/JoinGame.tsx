@@ -48,17 +48,6 @@ export default class JoinGame extends React.Component<IPropsType, IStateType> {
         <div className="column is-1" />
 
         <div className="column is-3">
-          <div className="title is-4">Start new room</div>
-          <div className="field">
-            <button className="button is-info is-fullwidth" onClick={this.handleStartClick} disabled={!this.isStartEnabled()}>
-              Start new room
-            </button>
-          </div>
-        </div>
-
-        <div className="column is-1" />
-
-        <div className="column is-3">
           <h3 className="title is-4">Join existing room</h3>
           <div className="columns">
             <div className="column">
@@ -75,7 +64,18 @@ export default class JoinGame extends React.Component<IPropsType, IStateType> {
             </div>
           </div>
 
-          {this.state.joinRoomError && <p className="has-text-danger">Error: Room does not exist</p>}
+          {this.state.joinRoomError && <p className="has-text-danger">Room does not exist</p>}
+        </div>
+
+        <div className="column is-1" />
+
+        <div className="column is-3">
+          <div className="title is-4">Start new room</div>
+          <div className="field">
+            <button className="button is-info is-fullwidth" onClick={this.handleStartClick} disabled={!this.isStartEnabled()}>
+              Start new room
+            </button>
+          </div>
         </div>
       </div>
     );

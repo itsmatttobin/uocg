@@ -100,6 +100,7 @@ io.on('connection', socket => {
     safeJoin(roomId);
     addPlayerToRoom(socket, name, roomId);
     updateRoom(roomId);
+    socket.emit('ROOM_CREATED', roomId);
   });
 
   socket.on('LEAVE_ROOM', (playerId, roomId) => {
@@ -141,6 +142,7 @@ io.on('connection', socket => {
     }
 
     updateRoom(roomId);
+    socket.emit('ROUND_START');
   });
 
   socket.on('PLAY_CARD', (roomId, card, playerId) => {
@@ -184,6 +186,7 @@ io.on('connection', socket => {
 
     io.to(roomId).emit('END_OF_ROUND', player, currentCard, card);
     updateRoom(roomId);
+    socket.emit('ROUND_END', currentCard, card);
   });
 
   socket.on('RESTART_GAME', roomId => {

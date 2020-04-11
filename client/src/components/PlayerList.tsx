@@ -8,8 +8,8 @@ export default class PlayerList extends React.Component<IPropsType, IStateType> 
 
   renderPlayer = () => this.props.players && this.props.players.map((player: IPlayer) => (
     <li key={player.id}>
-      <div className="columns">
-        <div className="column">
+      <div className="columns is-mobile">
+        <div className="column is-8">
           {player.name}
         </div>
         <div className="column is-4 has-text-centered">
@@ -36,12 +36,12 @@ export default class PlayerList extends React.Component<IPropsType, IStateType> 
     return (
       <div>
         <h3 className="title is-4">Players</h3>
-        <div className="columns">
+        <div className="columns is-mobile">
           <div className="column">
             <h6 className="title is-6">Name</h6>
           </div>
           <div className="column is-4 has-text-centered">
-            <h6 className="title is-6">Score</h6>
+            <h6 className="title is-6 player-score">Score</h6>
           </div>
         </div>
 

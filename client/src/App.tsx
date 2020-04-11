@@ -54,7 +54,6 @@ export default class App extends React.Component<{}, IStateType> {
     // Remove player from the room when leaving
     window.addEventListener('unload', () => {
       if (this.hasPlayerJoinedRoom()) {
-        // TODO: Add white cards back to the deck
         this.socket.emit(EVENTS.LEAVE_ROOM, this.state.socketId, this.state.room.id);
       }
     });
@@ -77,6 +76,35 @@ export default class App extends React.Component<{}, IStateType> {
       ReactGA.initialize(trackingCode);
       ReactGA.pageview('/home');
     }
+
+    this.socket.on(EVENTS.ROOM_CREATED, (roomId: string) => {
+      if (process.env.NODE_ENV === 'production') {
+        ReactGA.event({
+          category: 'Room',
+          action: 'Created',
+          label: roomId,
+        });
+      }
+    });
+
+    this.socket.on(EVENTS.ROUND_START, () => {
+      if (process.env.NODE_ENV === 'production') {
+        ReactGA.event({
+          category: 'Round',
+          action: 'Started',
+        });
+      }
+    });
+
+    this.socket.on(EVENTS.ROUND_END, (currentCard: IBlackCard, card: IAnswerCard) => {
+      if (process.env.NODE_ENV === 'production') {
+        ReactGA.event({
+          category: 'Round',
+          action: 'Ended',
+          label: `${currentCard.text} | ${card.text}`,
+        });
+      }
+    });
   }
 
   handleStartRoom = (name: string) => {

@@ -20,7 +20,7 @@ export default class AnswerCardArea extends React.Component<IPropsType> {
 
         <div className="columns is-multiline">
           {this.props.room.answerCards.map((card, index) => (
-            <div  key={index} className="column is-one-quarter">
+            <div  key={index} className="column is-5-tablet is-3-desktop">
               <AnswerCard card={card} onCardClick={this.handleCardClick} onChooseCardClick={this.handleChooseCardClick} />
             </div>
           ))}
