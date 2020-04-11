@@ -87,6 +87,15 @@ export default class App extends React.Component<{}, IStateType> {
       }
     });
 
+    this.socket.on(EVENTS.PLAYER_JOINED_ROOM, () => {
+      if (process.env.NODE_ENV === 'production') {
+        ReactGA.event({
+          category: 'Room',
+          action: 'Player joined',
+        });
+      }
+    });
+
     this.socket.on(EVENTS.ROUND_START, () => {
       if (process.env.NODE_ENV === 'production') {
         ReactGA.event({

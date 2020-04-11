@@ -87,6 +87,7 @@ io.on('connection', socket => {
     safeJoin(roomId);
     addPlayerToRoom(socket, name, roomId);
     updateRoom(roomId);
+    socket.emit('PLAYER_JOINED_ROOM');
   });
 
   socket.on('START_ROOM', name => {
@@ -101,6 +102,7 @@ io.on('connection', socket => {
     addPlayerToRoom(socket, name, roomId);
     updateRoom(roomId);
     socket.emit('ROOM_CREATED', roomId);
+    socket.emit('PLAYER_JOINED_ROOM');
   });
 
   socket.on('LEAVE_ROOM', (playerId, roomId) => {
