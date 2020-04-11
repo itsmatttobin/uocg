@@ -6,13 +6,13 @@ import EVENTS from '../definitions/events';
 export default class Hand extends React.Component<IPropsType> {
   handleDrawCardClick = () => {
     if (this.props.hand.length < 10) {
-      this.props.socket.emit(EVENTS.DRAW_WHITE_CARD, this.props.roomId, this.props.socket.id);
+      this.props.socket.emit(EVENTS.DRAW_WHITE_CARD, this.props.room.id, this.props.socket.id);
     }
   }
 
   handlePlayCard = (card: string) => {
     if (this.props.room.currentCard) {
-      this.props.socket.emit(EVENTS.PLAY_CARD, this.props.roomId, card, this.props.socket.id);
+      this.props.socket.emit(EVENTS.PLAY_CARD, this.props.room.id, card, this.props.socket.id);
     }
   }
 
@@ -45,6 +45,10 @@ export default class Hand extends React.Component<IPropsType> {
             </div>
           ))}
         </div>
+
+        <div className="is-size-6 has-text-grey-light">
+          After a question card has been drawn, hover over a card and click 'Play' to play that card.
+        </div>
       </div>
     );
   }
@@ -52,7 +56,6 @@ export default class Hand extends React.Component<IPropsType> {
 
 interface IPropsType {
   socket: SocketIOClient.Socket;
-  roomId: string;
   room: IRoom;
   hand: string[];
 }
