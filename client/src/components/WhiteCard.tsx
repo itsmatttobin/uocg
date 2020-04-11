@@ -7,7 +7,7 @@ export default class WhiteCard extends React.Component<IPropsType> {
 
   render() {
     return (
-      <div className="uocg-card is-size-4 has-text-weight-bold">
+      <div className="uocg-card uocg-card--in-hand is-size-4 has-text-weight-bold">
         {this.props.card}
 
         {this.props.isPlayable && (
