@@ -45,6 +45,10 @@ export default class Hand extends React.Component<IPropsType> {
             </div>
           ))}
         </div>
+
+        <div className="is-size-6 has-text-grey-light">
+          After a question card has been drawn, hover over a card and click 'Play' to play that card.
+        </div>
       </div>
     );
   }
