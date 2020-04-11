@@ -6,11 +6,11 @@ import EVENTS from '../definitions/events';
 
 export default class AnswerCardArea extends React.Component<IPropsType> {
   handleCardClick = (card: IAnswerCardType) => {
-    this.props.socket.emit(EVENTS.REVEAL_CARD, this.props.roomId, card);
+    this.props.socket.emit(EVENTS.REVEAL_CARD, this.props.room.id, card);
   }
 
   handleChooseCardClick = (card: IAnswerCardType) => {
-    this.props.socket.emit(EVENTS.CHOOSE_WINNING_CARD, this.props.roomId, card, this.props.room.currentCard);
+    this.props.socket.emit(EVENTS.CHOOSE_WINNING_CARD, this.props.room.id, card, this.props.room.currentCard);
   }
 
   render() {
@@ -32,6 +32,5 @@ export default class AnswerCardArea extends React.Component<IPropsType> {
 
 interface IPropsType {
   socket: SocketIOClient.Socket;
-  roomId: string;
   room: IRoom;
 }

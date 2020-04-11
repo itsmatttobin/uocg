@@ -19,8 +19,6 @@ import ReactGA from 'react-ga';
 export default class App extends React.Component<{}, IStateType> {
   state: IStateType = {
     host: process.env.REACT_APP_SERVER_HOST || '',
-    roomId: '',
-    name: '',
     room: {
       id: '',
       blackCards: [],
@@ -30,7 +28,6 @@ export default class App extends React.Component<{}, IStateType> {
       answerCards: [],
     },
     playerState: PLAYER_STATE.NOT_IN_ROOM,
-    socketId: '',
     roundModal: {
       open: false,
       player: null,
@@ -42,10 +39,6 @@ export default class App extends React.Component<{}, IStateType> {
   socket = socketIOClient(this.state.host);
 
   componentDidMount = () => {
-    this.socket.on('connect', () => {
-      this.setState({ socketId: this.socket.id });
-    });
-
     // Watch for changes when the current room updates
     this.socket.on(EVENTS.UPDATE_ROOM, (room: IRoom) => {
       this.setState({ room, playerState: PLAYER_STATE.JOINED_ROOM });
@@ -54,7 +47,7 @@ export default class App extends React.Component<{}, IStateType> {
     // Remove player from the room when leaving
     window.addEventListener('unload', () => {
       if (this.hasPlayerJoinedRoom()) {
-        this.socket.emit(EVENTS.LEAVE_ROOM, this.state.socketId, this.state.room.id);
+        this.socket.emit(EVENTS.LEAVE_ROOM, this.socket.id, this.state.room.id);
       }
     });
 
@@ -117,23 +110,19 @@ export default class App extends React.Component<{}, IStateType> {
   }
 
   handleStartRoom = (name: string) => {
-    this.setState({ name }, () => {
-      this.socket.emit(EVENTS.START_ROOM, this.state.name);
+    this.socket.emit(EVENTS.START_ROOM, name);
 
-      if (process.env.NODE_ENV === 'production') {
-        ReactGA.pageview('/inRoom');
-      }
-    });
+    if (process.env.NODE_ENV === 'production') {
+      ReactGA.pageview('/inRoom');
+    }
   }
 
   handleJoinRoom = (roomId: string, name: string) => {
-    this.setState({ roomId, name }, () => {
-      this.socket.emit(EVENTS.JOIN_ROOM, this.state.roomId, this.state.name);
+    this.socket.emit(EVENTS.JOIN_ROOM, roomId, name);
 
-      if (process.env.NODE_ENV === 'production') {
-        ReactGA.pageview('/inRoom');
-      }
-    });
+    if (process.env.NODE_ENV === 'production') {
+      ReactGA.pageview('/inRoom');
+    }
   }
 
   hasPlayerJoinedRoom = () => this.state.playerState === PLAYER_STATE.JOINED_ROOM;
@@ -166,7 +155,7 @@ export default class App extends React.Component<{}, IStateType> {
           {this.hasPlayerJoinedRoom() && (
             <div className="columns">
               <div className="column">
-                <GameArea socket={this.socket} roomId={this.state.room.id} room={this.state.room} />
+                <GameArea socket={this.socket} room={this.state.room} />
               </div>
               <div className="column is-2">
                 <PlayerList players={this.state.room.players} onRestartGame={this.handleRestartGame} />
@@ -185,10 +174,7 @@ export default class App extends React.Component<{}, IStateType> {
 
 interface IStateType {
   host: string;
-  roomId: string;
-  name: string;
   room: IRoom;
   playerState: PLAYER_STATE;
-  socketId: string;
   roundModal: IRoundModal;
 }

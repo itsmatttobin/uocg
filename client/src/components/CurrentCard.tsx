@@ -7,7 +7,7 @@ import StartRound from './StartRound';
 export default class CurrentCard extends React.Component<IPropsType> {
   handleDrawBlackCardClick = () => {
     if (this.props.room.blackCards.length > 0) {
-      this.props.socket.emit(EVENTS.DRAW_BLACK_CARD, this.props.roomId);
+      this.props.socket.emit(EVENTS.DRAW_BLACK_CARD, this.props.room.id);
     }
   }
 
@@ -33,6 +33,5 @@ export default class CurrentCard extends React.Component<IPropsType> {
 
 interface IPropsType {
   socket: SocketIOClient.Socket;
-  roomId: string;
   room: IRoom;
 }

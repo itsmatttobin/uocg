@@ -20,17 +20,17 @@ export default class GameArea extends React.Component<IPropsType> {
 
         <div className="columns">
           <div className="column is-one-fifth">
-            <CurrentCard socket={this.props.socket} roomId={this.props.roomId} room={this.props.room} />
+            <CurrentCard socket={this.props.socket} room={this.props.room} />
           </div>
 
           <div className="column is-four-fifths">
-            <AnswerCardArea socket={this.props.socket} roomId={this.props.roomId} room={this.props.room} />
+            <AnswerCardArea socket={this.props.socket} room={this.props.room} />
           </div>
         </div>
 
         <hr/>
 
-        <Hand socket={this.props.socket} roomId={this.props.roomId} room={this.props.room} hand={this.getCurrentPlayerHand()} />
+        <Hand socket={this.props.socket} room={this.props.room} hand={this.getCurrentPlayerHand()} />
       </div>
     );
   }
@@ -38,6 +38,5 @@ export default class GameArea extends React.Component<IPropsType> {
 
 interface IPropsType {
   socket: SocketIOClient.Socket;
-  roomId: string;
   room: IRoom;
 }
