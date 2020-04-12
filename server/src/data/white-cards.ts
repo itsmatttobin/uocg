@@ -1,4 +1,4 @@
-const whiteCards = [
+const whiteCards: string[] = [
   'Coat hanger abortions.',
   'Man meat.',
   'Autocannibalism.',
@@ -461,4 +461,4 @@ const whiteCards = [
   'Throwing a virgin into a volcano.',
 ];
 
-module.exports = whiteCards;
+export default whiteCards;

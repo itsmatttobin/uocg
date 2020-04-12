@@ -1,4 +1,6 @@
-const blackCards = [
+import IBlackCard from '../definitions/black-card';
+
+const blackCards: IBlackCard[] = [
   {
     text: 'Why can\'t I sleep at night?',
     pick: 1,
@@ -361,4 +363,4 @@ const blackCards = [
   },
 ];
 
-module.exports = blackCards;
+export default blackCards;
