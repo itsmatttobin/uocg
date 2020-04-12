@@ -5,4 +5,4 @@ COPY yarn.lock ./
 RUN yarn install
 COPY . .
 EXPOSE 4000
-CMD [ "node", "app.js" ]
+CMD [ "node", "build/app.js" ]
