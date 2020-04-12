@@ -18,3 +18,16 @@ jobs:
       - name: Lint
         run: yarn lint
         working-directory: ./client
+
+  lint-server:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Install dependencies
+        run: yarn install
+        working-directory: ./server
+      
+      - name: Lint
+        run: yarn lint
+        working-directory: ./server
