@@ -209,6 +209,10 @@ io.on('connection', socket => {
   });
 });
 
+app.get('/', (_req, res) => {
+  res.send('ok');
+});
+
 http.listen(4000, () => {
   console.log('Listening on port 4000');
 });
