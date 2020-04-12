@@ -4,9 +4,9 @@
   "private": true,
   "scripts": {
     "start": "node build/app.js",
-    "start:watch": "concurrently -k \"tsc -w\" \"nodemon build/app.js\"",
+    "start:watch": "concurrently \"NODE_ENV=development webpack\" \"nodemon build/app.js\"",
     "lint": "tslint -c tslint.json -p .",
-    "build": "tsc"
+    "build": "webpack"
   },
   "dependencies": {
     "@types/cors": "^2.8.6",
@@ -16,9 +16,14 @@
     "concurrently": "^5.1.0",
     "cors": "^2.8.5",
     "express": "^4.17.1",
-    "nodemon": "^2.0.2",
+    "nodemon": "^2.0.3",
     "socket.io": "^2.3.0",
+    "ts-loader": "^6.2.2",
     "tslint": "^6.1.1",
-    "typescript": "^3.8.3"
+    "typescript": "^3.8.3",
+    "webpack": "^4.42.1",
+    "webpack-cli": "^3.3.11",
+    "webpack-node-externals": "^1.7.2",
+    "webpack-shell-plugin": "^0.5.0"
   }
 }
