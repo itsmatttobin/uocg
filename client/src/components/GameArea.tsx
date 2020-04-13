@@ -5,6 +5,14 @@ import CurrentCard from './CurrentCard';
 import AnswerCardArea from './AnswerCardArea';
 
 export default class GameArea extends React.Component<IPropsType> {
+  componentDidMount = () => {
+    // Display warning before leaving / reloading the page
+    window.addEventListener('beforeunload', e => {
+      e.preventDefault();
+      e.returnValue = '';
+    });
+  }
+
   getCurrentPlayerHand = () => {
     const currentPlayer = this.props.room.players.find(player => player.id === this.props.socket.id);
     const hand =  currentPlayer ? currentPlayer.hand : [];
@@ -31,6 +39,13 @@ export default class GameArea extends React.Component<IPropsType> {
         <hr/>
 
         <Hand socket={this.props.socket} room={this.props.room} hand={this.getCurrentPlayerHand()} />
+
+        {this.props.connectionError && (
+          <div className="connection-error has-text-centered has-background-danger has-text-white">
+            <p className="has-text-weight-bold">Connection error!</p>
+            <p className="is-size-7">Please refresh and rejoin the room</p>
+          </div>
+        )}
       </div>
     );
   }
@@ -39,4 +54,5 @@ export default class GameArea extends React.Component<IPropsType> {
 interface IPropsType {
   socket: SocketIOClient.Socket;
   room: IRoom;
+  connectionError: boolean;
 }

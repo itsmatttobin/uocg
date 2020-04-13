@@ -119,3 +119,11 @@
 ::placeholder {
   color: $grey-light !important;
 }
+
+.connection-error {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 5px;
+}
