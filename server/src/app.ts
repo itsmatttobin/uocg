@@ -87,6 +87,26 @@ io.on('connection', socket => {
     previousId = currentId;
   };
 
+  socket.on('disconnect', () => {
+    for (const roomId in rooms) {
+      if (rooms.hasOwnProperty(roomId)) {
+        // Check if the room included the disconnected player
+        if (rooms[roomId].players.map(_player => _player.id).includes(socket.id)) {
+          // Remove player from room
+          const player = rooms[roomId] && rooms[roomId].players.find(_player => _player.id === socket.id);
+          const index = rooms[roomId].players.indexOf(player);
+          rooms[roomId].players.splice(index, 1);
+          updateRoom(roomId);
+
+          // Delete room data if room is empty
+          if (rooms[roomId] && !rooms[roomId].players.length) {
+            delete rooms[roomId];
+          }
+        }
+      }
+    }
+  });
+
   socket.on(EVENTS.JOIN_ROOM, (roomId: string, name: string) => {
     if (!rooms[roomId]) {
       socket.emit(EVENTS.NO_ROOM_EXISTS);
@@ -112,23 +132,6 @@ io.on('connection', socket => {
     updateRoom(roomId);
     socket.emit(EVENTS.ROOM_CREATED, roomId);
     socket.emit(EVENTS.PLAYER_JOINED_ROOM);
-  });
-
-  socket.on(EVENTS.LEAVE_ROOM, (playerId: string, roomId: string) => {
-    const player = rooms[roomId] && rooms[roomId].players.find(_player => _player.id === playerId);
-
-    if (player && rooms[roomId]) {
-      const index = rooms[roomId].players.indexOf(player);
-      rooms[roomId].players.splice(index, 1);
-    }
-
-    socket.leave(roomId);
-    updateRoom(roomId);
-
-    // Delete room data if room is empty
-    if (rooms[roomId] && !rooms[roomId].players.length) {
-      delete rooms[roomId];
-    }
   });
 
   socket.on(EVENTS.DRAW_WHITE_CARD, (roomId: string, playerId: string) => {
