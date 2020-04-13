@@ -34,6 +34,7 @@ export default class App extends React.Component<{}, IStateType> {
       question: null,
       answer: null,
     },
+    connectionError: false,
   };
 
   socket = socketIOClient(this.state.host);
@@ -42,13 +43,6 @@ export default class App extends React.Component<{}, IStateType> {
     // Watch for changes when the current room updates
     this.socket.on(EVENTS.UPDATE_ROOM, (room: IRoom) => {
       this.setState({ room, playerState: PLAYER_STATE.JOINED_ROOM });
-    });
-
-    // Remove player from the room when leaving
-    window.addEventListener('unload', () => {
-      if (this.hasPlayerJoinedRoom()) {
-        this.socket.emit(EVENTS.LEAVE_ROOM, this.socket.id, this.state.room.id);
-      }
     });
 
     // Display round winner
@@ -61,6 +55,11 @@ export default class App extends React.Component<{}, IStateType> {
           answer,
         },
       });
+    });
+
+    // Set disconnected state
+    this.socket.on('disconnect', () => {
+      this.setState({ connectionError: true });
     });
 
     // Analytics
@@ -155,7 +154,11 @@ export default class App extends React.Component<{}, IStateType> {
           {this.hasPlayerJoinedRoom() && (
             <div className="columns">
               <div className="column">
-                <GameArea socket={this.socket} room={this.state.room} />
+                <GameArea
+                  socket={this.socket}
+                  room={this.state.room}
+                  connectionError={this.state.connectionError}
+                />
               </div>
               <div className="column is-2">
                 <PlayerList players={this.state.room.players} onRestartGame={this.handleRestartGame} />
@@ -177,4 +180,5 @@ interface IStateType {
   room: IRoom;
   playerState: PLAYER_STATE;
   roundModal: IRoundModal;
+  connectionError: boolean;
 }
