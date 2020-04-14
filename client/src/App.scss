@@ -75,6 +75,23 @@
       display: block;
     }
   }
+
+  @media screen and (min-width: 961px) and (max-width: 1400px) {
+    font-size: 18px !important;
+
+    .is-size-3 {
+      font-size: 24px !important;
+    }
+  }
+
+  @media screen and (min-width: 769px) and (max-width: 960px) {
+    font-size: 16px !important;
+    height: 18rem;
+
+    .is-size-3 {
+      font-size: 20px !important;
+    }
+  }
 }
 
 .button-section {
