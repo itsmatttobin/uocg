@@ -38,15 +38,21 @@ export default class Hand extends React.Component<IPropsType> {
           </div>
         </div>
 
-        <div className="columns is-multiline">
-          {this.props.hand.map((card, index) => (
-            <div key={index} className="column is-one-fifth">
-              <WhiteCard card={card} isPlayable={this.hasQuestionCard() && !this.playerHasPlayedCards()} onPlayCard={this.handlePlayCard} />
-            </div>
-          ))}
+        <div className={`card-row__container ${this.props.hand.length ? 'card-row__container--has-cards' : ''}`}>
+          <div className="columns is-multiline card-row">
+            {this.props.hand.map((card, index) => (
+              <div key={index} className="column is-one-fifth">
+                <WhiteCard
+                  card={card}
+                  isPlayable={this.hasQuestionCard() && !this.playerHasPlayedCards()}
+                  onPlayCard={this.handlePlayCard}
+                />
+              </div>
+            ))}
+          </div>
         </div>
 
-        <div className="is-size-6 has-text-grey-light">
+        <div className="is-size-6 has-text-grey-light hand-tip">
           After a question card has been drawn, hover over a card and click 'Play' to play that card.
         </div>
       </div>

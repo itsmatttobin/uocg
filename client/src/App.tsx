@@ -144,7 +144,7 @@ export default class App extends React.Component<{}, IStateType> {
   render() {
     return (
       <div className="wrapper">
-        <Header/>
+        {!this.hasPlayerJoinedRoom() && <Header/>}
 
         <div className="main">
           {!this.hasPlayerJoinedRoom() && (
@@ -153,7 +153,7 @@ export default class App extends React.Component<{}, IStateType> {
 
           {this.hasPlayerJoinedRoom() && (
             <div className="columns">
-              <div className="column">
+              <div className="column game-area">
                 <GameArea
                   socket={this.socket}
                   room={this.state.room}
