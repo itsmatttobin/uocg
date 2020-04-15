@@ -144,7 +144,7 @@ export default class App extends React.Component<{}, IStateType> {
   render() {
     return (
       <div className="wrapper">
-        {!this.hasPlayerJoinedRoom() && <Header/>}
+        <Header/>
 
         <div className="main">
           {!this.hasPlayerJoinedRoom() && (
