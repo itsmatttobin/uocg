@@ -15,7 +15,7 @@ export default class CurrentCard extends React.Component<IPropsType> {
 
   render() {
     return (
-      <div>
+      <div className="question-card-section">
         <div className="button-section">
           <button className="button is-info is-fullwidth" onClick={this.handleDrawBlackCardClick}>Draw question card</button>
         </div>

@@ -11,6 +11,28 @@ export default class GameArea extends React.Component<IPropsType> {
       e.preventDefault();
       e.returnValue = '';
     });
+
+    // Fix question card to top of screen for mobile when scrolling
+    document.addEventListener('scroll', () => {
+      if (window.innerWidth < 768) {
+        const answerSection = document.querySelector('.answer-card-section');
+        const cardSection = document.querySelector('.question-card-section');
+        const cardHeight = cardSection && cardSection.getBoundingClientRect().height;
+
+        if (cardSection && cardSection?.getBoundingClientRect().bottom < 75) {
+          cardSection?.classList.add('question-card-section--fixed');
+          cardSection?.setAttribute('style', `min-height: ${cardHeight}px`);
+
+          const fixedCard = document.querySelector('.question-card-section--fixed .uocg-card');
+          const fixedCardHeight = fixedCard && fixedCard.getBoundingClientRect().height;
+          answerSection?.setAttribute('style', `padding-top: ${Number(fixedCardHeight) - 55}px`);
+        } else {
+          cardSection?.classList.remove('question-card-section--fixed');
+          cardSection?.removeAttribute('style');
+          answerSection?.removeAttribute('style');
+        }
+      }
+    });
   }
 
   getCurrentPlayerHand = () => {

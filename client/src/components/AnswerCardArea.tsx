@@ -15,16 +15,23 @@ export default class AnswerCardArea extends React.Component<IPropsType> {
 
   render() {
     return (
-      <div>
+      <div className="answer-card-section">
         <h3 className="title title--answer-area is-4">Answer cards</h3>
 
-        <div className="columns is-multiline">
-          {this.props.room.answerCards.map((card, index) => (
-            <div  key={index} className="column is-5-tablet is-3-desktop">
-              <AnswerCard card={card} onCardClick={this.handleCardClick} onChooseCardClick={this.handleChooseCardClick} />
-            </div>
-          ))}
+        <div className="card-row__container">
+          <div className="columns is-multiline card-row">
+            {this.props.room.answerCards.map((card, index) => (
+              <div  key={index} className="column is-5-tablet is-3-desktop">
+                <AnswerCard card={card} onCardClick={this.handleCardClick} onChooseCardClick={this.handleChooseCardClick} />
+              </div>
+            ))}
+          </div>
         </div>
+        {!this.props.room.answerCards.length && (
+          <div className="is-size-6 has-text-grey-light hand-tip">
+            Answer cards will be displayed here when played.
+          </div>
+        )}
       </div>
     );
   }

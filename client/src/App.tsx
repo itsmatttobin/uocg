@@ -153,7 +153,7 @@ export default class App extends React.Component<{}, IStateType> {
 
           {this.hasPlayerJoinedRoom() && (
             <div className="columns">
-              <div className="column">
+              <div className="column game-area">
                 <GameArea
                   socket={this.socket}
                   room={this.state.room}
