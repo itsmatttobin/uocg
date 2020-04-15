@@ -27,6 +27,11 @@ export default class AnswerCardArea extends React.Component<IPropsType> {
             ))}
           </div>
         </div>
+        {!this.props.room.answerCards.length && (
+          <div className="is-size-6 has-text-grey-light hand-tip">
+            Answer cards will be displayed here when played.
+          </div>
+        )}
       </div>
     );
   }
