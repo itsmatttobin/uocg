@@ -13,7 +13,7 @@ import IAnswerCard from './definitions/answer-card';
 const app = express();
 app.use(cors());
 const server = http.createServer(app);
-const io = socketio(server, { serveClient: false });
+const io = socketio(server, { serveClient: false, pingTimeout: 20000 });
 
 const rooms: { [x: string]: IRoom } = {};
 
