@@ -361,6 +361,289 @@ const blackCards: IBlackCard[] = [
     text: 'Daddy, why is Mommy crying?',
     pick: 1,
   },
+  /////////////////////////////////////////////////////
+  ///////////////////// RED BOX ///////////////////////
+  /////////////////////////////////////////////////////
+  {
+    text: 'What brought the orgy to a grinding halt?',
+    pick: 1,
+  },
+  {
+    text: 'When I pooped, what came out of my butt?',
+    pick: 1,
+  },
+  {
+    text: 'In the distant future, historians will agree that ___ marked the beginning of America\'s decline.',
+    pick: 1,
+  },
+  {
+    text: 'What\'s the gift that keeps on giving?',
+    pick: 1,
+  },
+  {
+    text: 'This season on Man vs. Wild, Bear Grylls must survive in the depths of the Amazon with only ___ and his wits.',
+    pick: 1,
+  },
+  // {
+  //   text: 'Michael Bay\'s new three-hour action epic pits ___ against ___.',
+  //   pick: 2,
+  // },
+  {
+    text: 'And I would have gotten away with it, too, if it hadn\'t been for ___!',
+    pick: 1,
+  },
+  // {
+  //   text: 'In a pinch, ___ can be a suitable substitute for ___.',
+  //   pick: 2,
+  // },
+  {
+    text: 'What has been making life difficult at the nudist colony?',
+    pick: 1,
+  },
+  {
+    text: 'Science will never explain the origin of ___.',
+    pick: 1,
+  },
+  {
+    text: 'In Rome, there are whisperings that the Vatican has a secret room devoted to ___.',
+    pick: 1,
+  },
+  {
+    text: 'I learned the hard way that you can\'t cheer up a grieving friend with ___.',
+    pick: 1,
+  },
+  {
+    text: 'When all else fails, I can always masturbate to ___.',
+    pick: 1,
+  },
+  // {
+  //   text: 'An international tribunal has found ___ guilty of ___.',
+  //   pick: 2,
+  // },
+  {
+    text: 'In its new tourism campaign, Detroit proudly proclaims that it has finally eliminated ___.',
+    pick: 1,
+  },
+  {
+    text: 'In his new self-produced album, Kanye West raps over the sounds of ___.',
+    pick: 1,
+  },
+  {
+    text: 'The socialist governments of Scandinavia have declared that access to ___ is a basic human right.',
+    pick: 1,
+  },
+  {
+    text: 'He who controls ___ controls the world.',
+    pick: 1,
+  },
+  // {
+  //   text: 'Dear Sir or Madam, We regret to inform you that the Office of ___ has denied your request for ___.',
+  //   pick: 2,
+  // },
+  {
+    text: 'The CIA now interrogates enemy agents by repeatedly subjecting them to ___.',
+    pick: 1,
+  },
+  // {
+  //   text: '___ would be woefully incomplete without ___.',
+  //   pick: 2,
+  // },
+  {
+    text: 'During his midlife crisis, my dad got really into ___.',
+    pick: 1,
+  },
+  {
+    text: 'Before I run for president, I must destroy all evidence of my involvement with ___.',
+    pick: 1,
+  },
+  {
+    text: 'My new favorite porn star is Joey \'___\' McGee.',
+    pick: 1,
+  },
+  {
+    text: 'In his newest and most difficult stunt, David Blaine must escape from ___.',
+    pick: 1,
+  },
+  {
+    text: 'This is your captain speaking. Fasten your seatbelts and prepare for ___.',
+    pick: 1,
+  },
+  // {
+  //   text: 'My mom freaked out when she looked at my browser history and found ___.com\/___.',
+  //   pick: 2,
+  // },
+  {
+    text: 'The Five Stages of Grief: denial, anger, bargaining, ___, acceptance.',
+    pick: 1,
+  },
+  {
+    text: 'Members of New York\'s social elite are paying thousands of dollars just to experience ___.',
+    pick: 1,
+  },
+  {
+    text: 'I went from ___ to ___, all thanks to ___.',
+    pick: 3,
+  },
+  {
+    text: 'Little Miss Muffet Sat on a tuffet, Eating her curds and ___.',
+    pick: 1,
+  },
+  {
+    text: 'This month\'s Cosmo: \'Spice up your sex life by bringing ___ into the bedroom.\'',
+    pick: 1,
+  },
+  // {
+  //   text: 'If God didn\'t want us to enjoy ___, he wouldn\'t have given us ___.',
+  //   pick: 2,
+  // },
+  {
+    text: 'My country, \'tis of thee, sweet land of ___.',
+    pick: 1,
+  },
+  {
+    text: 'After months of debate, the Occupy Wall Street General Assembly could only agree on \'More ___!\'',
+    pick: 1,
+  },
+  // {
+  //   text: 'I spent my whole life working toward ___, only to have it ruined by ___.',
+  //   pick: 2,
+  // },
+  {
+    text: 'Next time on Dr. Phil: How to talk to your child about ___.',
+    pick: 1,
+  },
+  {
+    text: 'Only two things in life are certain: death and ___.',
+    pick: 1,
+  },
+  {
+    text: 'Everyone down on the ground! We don\'t want to hurt anyone. We\'re just here for ___.',
+    pick: 1,
+  },
+  {
+    text: 'The healing process began when I joined a support group for victims of ___.',
+    pick: 1,
+  },
+  {
+    text: 'The votes are in, and the new high school mascot is ___.',
+    pick: 1,
+  },
+  {
+    text: 'Charades was ruined for me forever when my mom had to act out ___.',
+    pick: 1,
+  },
+  // {
+  //   text: 'Before ___, all we had was ___.',
+  //   pick: 2,
+  // },
+  {
+    text: 'Tonight on 20\/20: What you don\'t know about ___ could kill you.',
+    pick: 1,
+  },
+  // {
+  //   text: 'You haven\'t truly lived until you\'ve experienced ___ and ___ at the same time.',
+  //   pick: 2,
+  // },
+  {
+    text: 'Hey baby, come back to my place and I\'ll show you ___.',
+    pick: 1,
+  },
+  {
+    text: 'My gym teacher got fired for adding ___ to the obstacle course.',
+    pick: 1,
+  },
+  {
+    text: 'Finally! A service that delivers ___ right to your door.',
+    pick: 1,
+  },
+  {
+    text: 'To prepare for his upcoming role, Daniel Day-Lewis immersed himself in the world of ___.',
+    pick: 1,
+  },
+  // {
+  //   text: 'My life is ruled by a vicious cycle of ___ and ___.',
+  //   pick: 2,
+  // },
+  {
+    text: 'During high school, I never really fit in until I found ___ club.',
+    pick: 1,
+  },
+  {
+    text: 'Money can\'t buy me love, but it can buy me ___.',
+    pick: 1,
+  },
+  // {
+  //   text: 'Listen, son. If you want to get involved with ___, I won\'t stop you. Just steer clear of ___.',
+  //   pick: 2,
+  // },
+  {
+    text: 'A successful job interview begins with a firm handshake and ends with ___.',
+    pick: 1,
+  },
+  {
+    text: 'Call the law offices of Goldstein &amp; Goldstein, because no one should have to tolerate ___ in the workplace.',
+    pick: 1,
+  },
+  {
+    text: 'Lovin\' you is easy \'cause you\'re ___.',
+    pick: 1,
+  },
+  {
+    text: 'The blind date was going horribly until we discovered our shared interest in ___.',
+    pick: 1,
+  },
+  {
+    text: 'What left this stain on my couch?',
+    pick: 1,
+  },
+  {
+    text: 'Turns out that ___-Man was neither the hero we needed nor wanted.',
+    pick: 1,
+  },
+  // {
+  //   text: 'After months of practice with ___, I think I\'m finally ready for ___.',
+  //   pick: 2,
+  // },
+  {
+    text: 'In the seventh circle of Hell, sinners must endure ___ for all eternity.',
+    pick: 1,
+  },
+  {
+    text: 'As part of his daily regimen, Anderson Cooper sets aside 15 minutes for ___.',
+    pick: 1,
+  },
+  // {
+  //   text: 'When you get right down to it, ___ is just ___.',
+  //   pick: 2,
+  // },
+  // {
+  //   text: 'Having problems with ___? Try ___!',
+  //   pick: 2,
+  // },
+  {
+    text: 'And what did you bring for show and tell?',
+    pick: 1,
+  },
+  {
+    text: 'I\'m not like the rest of you. I\'m too rich and busy for ___.',
+    pick: 1,
+  },
+  // {
+  //   text: 'With enough time and pressure, ___ will turn into ___.',
+  //   pick: 2,
+  // },
+  // {
+  //   text: '___: Hours of fun. Easy to use. Perfect for ___!',
+  //   pick: 2,
+  // },
+  {
+    text: '___. Awesome in theory, kind of a mess in practice.',
+    pick: 1,
+  },
+  {
+    text: 'As part of his contract, Prince won\'t perform without ___ in his dressing room.',
+    pick: 1,
+  },
 ];
 
 export default blackCards;
