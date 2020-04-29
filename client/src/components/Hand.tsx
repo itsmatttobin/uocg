@@ -16,7 +16,7 @@ export default class Hand extends React.Component<IPropsType> {
     }
   }
 
-  isDrawCardDisabled = () => this.props.hand.length === 10;
+  isDrawCardDisabled = () => this.props.hand.length === 10 || !this.props.room.whiteCards.length;
 
   hasQuestionCard = () => !!this.props.room.currentCard;
 
@@ -35,6 +35,12 @@ export default class Hand extends React.Component<IPropsType> {
             <button className="button is-fullwidth" onClick={this.handleDrawCardClick} disabled={this.isDrawCardDisabled()}>
               Draw answer card
             </button>
+            {!this.props.room.whiteCards.length && (
+              <div className="has-text-grey-light has-text-centered cards-remaining">No answer cards remaining!</div>
+            )}
+          </div>
+          <div className="column">
+
           </div>
         </div>
 
