@@ -1,5 +1,9 @@
 @import "../node_modules/bulma/bulma.sass";
 
+body {
+  font-family: "Helvetica Neue", "Helvetica", "Arial", sans-serif;
+}
+
 // Responsive overrides
 @media screen and (min-width: 769px) and (max-width: 1029px) {
   .column.is-one-fifth {

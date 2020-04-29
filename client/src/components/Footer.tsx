@@ -8,8 +8,10 @@ const Footer = () => (
         <div className="version">
           <div>
             v{packageJson.version}<br/>
-            <a href="https://github.com/itsmatttobin/uocg" target="_blank" rel="noopener noreferrer">itsmatttobin/uocg</a><br/>
-            Found a bug? Report it <a href="https://github.com/itsmatttobin/uocg/issues" target="_blank" rel="noopener noreferrer">here</a>.
+            <a className="has-text-info" href="https://github.com/itsmatttobin/uocg" target="_blank" rel="noopener noreferrer">
+              itsmatttobin/uocg
+            </a><br/>
+            Found a bug? Report it <a className="has-text-info" href="https://github.com/itsmatttobin/uocg/issues" target="_blank" rel="noopener noreferrer">here</a>.
           </div>
         </div>
       </div>
