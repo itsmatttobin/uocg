@@ -480,10 +480,10 @@ const blackCards: IBlackCard[] = [
     text: 'Members of New York\'s social elite are paying thousands of dollars just to experience ___.',
     pick: 1,
   },
-  {
-    text: 'I went from ___ to ___, all thanks to ___.',
-    pick: 3,
-  },
+  // {
+  //   text: 'I went from ___ to ___, all thanks to ___.',
+  //   pick: 3,
+  // },
   {
     text: 'Little Miss Muffet Sat on a tuffet, Eating her curds and ___.',
     pick: 1,
@@ -581,7 +581,7 @@ const blackCards: IBlackCard[] = [
     pick: 1,
   },
   {
-    text: 'Call the law offices of Goldstein &amp; Goldstein, because no one should have to tolerate ___ in the workplace.',
+    text: 'Call the law offices of Goldstein & Goldstein, because no one should have to tolerate ___ in the workplace.',
     pick: 1,
   },
   {
