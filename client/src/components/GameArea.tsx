@@ -4,7 +4,11 @@ import Hand from './Hand';
 import CurrentCard from './CurrentCard';
 import AnswerCardArea from './AnswerCardArea';
 
-export default class GameArea extends React.Component<IPropsType> {
+export default class GameArea extends React.Component<IPropsType, IStateType> {
+  state: IStateType = {
+    modalOpen: false,
+  };
+
   componentDidMount = () => {
     // Display warning before leaving / reloading the page
     window.addEventListener('beforeunload', e => {
@@ -41,10 +45,21 @@ export default class GameArea extends React.Component<IPropsType> {
     return hand;
   }
 
+  onHowToPlayClick = () => {
+    this.setState({ modalOpen: true });
+  }
+
+  onModalCloseClick = () => {
+    this.setState({ modalOpen: false });
+  }
+
   render() {
     return (
       <div>
-        <h3 className="title is-4">Room ID: {this.props.room.id}</h3>
+        <div className="game-area__header">
+          <h3 className="title is-4">Room ID: {this.props.room.id}</h3>
+          <span className="rules-link has-text-info is-size-7" onClick={this.onHowToPlayClick}>How to play</span>
+        </div>
 
         <hr/>
 
@@ -68,6 +83,22 @@ export default class GameArea extends React.Component<IPropsType> {
             <p className="is-size-7">Please refresh and rejoin the room</p>
           </div>
         )}
+
+        <div className={`modal ${this.state.modalOpen ? 'is-active' : ''}`}>
+          <div className="modal-background" onClick={this.onModalCloseClick} />
+          <div className="modal-content">
+            <div className="box">
+              <div className="modal-close is-large" onClick={this.onModalCloseClick}>&times;</div>
+              <h3 className="title is-3 has-text-centered">How to play</h3>
+              <ul>
+                <li>- Each player draws 10 cards and must have 10 cards in their hand at all times.</li>
+                <li>- Players take it in turns to be the round host, drawing a question card.</li>
+                <li>- Each round, other players choose an answer card.</li>
+                <li>- The host chooses the best / funniest / most offensive card to win.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
       </div>
     );
   }
@@ -77,4 +108,8 @@ interface IPropsType {
   socket: SocketIOClient.Socket;
   room: IRoom;
   connectionError: boolean;
+}
+
+interface IStateType {
+  modalOpen: boolean;
 }
