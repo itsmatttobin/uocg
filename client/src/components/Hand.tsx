@@ -39,9 +39,6 @@ export default class Hand extends React.Component<IPropsType> {
               <div className="has-text-grey-light has-text-centered cards-remaining">No answer cards remaining!</div>
             )}
           </div>
-          <div className="column">
-
-          </div>
         </div>
 
         <div className={`card-row__container ${this.props.hand.length ? 'card-row__container--has-cards' : ''}`}>

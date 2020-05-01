@@ -5,9 +5,10 @@ export default class RoundModal extends React.Component<IPropsType> {
   render() {
     return (
       <div className={`modal ${this.props.modal.open ? 'is-active' : ''}`}>
-        <div className="modal-background" />
+        <div className="modal-background" onClick={this.props.onContinueClick} />
         <div className="modal-content">
           <div className="box has-text-centered">
+          <div className="modal-close is-large" onClick={this.props.onContinueClick}>&times;</div>
             <h3 className="title is-3">The winner is... {this.props.modal.player?.name}!</h3>
 
             <div className="columns has-text-left is-centered">
